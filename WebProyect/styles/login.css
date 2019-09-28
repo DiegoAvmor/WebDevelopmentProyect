@@ -124,14 +124,14 @@ input[type=submit]:hover{
     border-color: aliceblue;
 }
 
-a{
+#helpBox > a{
     margin: 10px;
     font-family: 'Roboto', sans-serif;
     color: aliceblue;
     text-decoration: none;
 }
 
-a:hover{
+#helpBox a:hover{
     color: dodgerblue;
 }
 
