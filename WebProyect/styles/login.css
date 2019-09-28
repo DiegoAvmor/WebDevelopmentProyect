@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100vh;
+    background-color: #26262B;
+    text-align: center;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 30% auto;
+    height: 100%;
+}
+
+.container .left{
+    padding: auto;
+    padding-top: 20%;
+}
+
+.container > .left .logContainer{
+    margin: auto;
+    padding: 10px;
+    border-radius: 25px;
+    width: 250px;
+    height: 350px;
+}
+
+i{
+    color: white;
+}
+
+.container>.right{
+    position: relative;
+    overflow: hidden;
+}
+
+#rightContent{
+    position: absolute;
+    z-index: 100;
+    top: 20vh;
+    left: 40%;
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+}
+
+/*Acomodacion para los iconos de las cajas*/
+.textContent {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input{
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 25px;
+}
+
+.textContent > input{
+    padding-left: 10px;
+    padding-right: 10px; 
+    width: 140px;
+    height: 25px;
+}
+
+input[type=submit]{
+    padding: 10px;
+    width: 50%;
+    color: dodgerblue;
+    background-color: aliceblue;
+    border: 3px solid dodgerblue;
+}
+
+input[type=submit]:hover{
+    cursor: pointer;
+    color: aliceblue;
+    background-color: dodgerblue;
+    border-color: aliceblue;
+}
+
+a{
+    margin: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: aliceblue;
+    text-decoration: none;
+}
+
+a:hover{
+    color: dodgerblue;
+}
+
+/*Imagenes*/
+#logIMG{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#bigImage{
+    width: 100%;
+    height: 100vh;
+    clip-path: polygon(35% 0, 100% 0, 100% 100%, 20% 100%, 0 57%);
+}
+
