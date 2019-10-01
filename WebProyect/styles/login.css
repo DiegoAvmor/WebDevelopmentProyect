@@ -33,7 +33,7 @@ i{
 }
 
 .container>.right{
-    position: relative;
+    
     overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ i{
     position: absolute;
     z-index: 100;
     top: 15vh;
-    left: 40%;
+    right: 5%;
     font-family: 'Roboto', sans-serif;
     color: whitesmoke;
 }
@@ -162,4 +162,14 @@ input[type=submit]:hover{
 #review:hover + .bubble {
     visibility: visible;
 }
+/*Responsive actions*/
+@media only screen and (max-width: 600px) {
+    .container{
+        display: inline;
+        padding: auto;
+    }
 
+    .container > .right{
+        display: none;
+    }
+  }
