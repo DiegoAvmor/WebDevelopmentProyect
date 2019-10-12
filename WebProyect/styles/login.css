@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 body{
+    --font: 'Roboto', sans-serif;
+    --textColor: whitesmoke;
     padding: 0px;
     margin: 0px;
     width: 100%;
@@ -15,12 +16,12 @@ body{
     height: 100%;
 }
 
-.container .left{
+.container #left{
     padding: auto;
     padding-top: 20%;
 }
 
-.container > .left .logContainer{
+.container > #left .logContainer{
     margin: auto;
     padding: 10px;
     border-radius: 25px;
@@ -32,8 +33,7 @@ i{
     color: white;
 }
 
-.container>.right{
-    
+.container>#right{
     overflow: hidden;
 }
 
@@ -42,8 +42,8 @@ i{
     z-index: 100;
     top: 15vh;
     right: 5%;
-    font-family: 'Roboto', sans-serif;
-    color: whitesmoke;
+    font-family: var(--font);
+    color: var(--textColor);
 }
 
 #rightContent > #infoContainer{
@@ -55,9 +55,10 @@ i{
 }
 
 #infoContainer > .contentInfo{
-    border: 2px solid whitesmoke;
+    border: 2px solid var(--textColor);
     transition: .4s;
 }
+/*Ligma*/
 
 /*Bubble text generator: https://www.ilikepixels.co.uk/bubbler/*/
 .bubble
@@ -163,6 +164,18 @@ input[type=submit]:hover{
 #review:hover + .bubble {
     visibility: visible;
 }
+
+.quoteContainer {
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+}
+
+.quoteContainer > h1,p{
+    font-family: var(--font);
+    color: var(--textColor);
+}
+
 /*Responsive actions*/
 @media only screen and (max-width: 600px) {
     .container{
@@ -170,7 +183,7 @@ input[type=submit]:hover{
         padding: auto;
     }
 
-    .container > .right{
+    .container > #right,.quoteContainer{
         display: none;
     }
   }
