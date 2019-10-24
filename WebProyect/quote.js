@@ -21,4 +21,6 @@ function generateQuote(author,content){
     quoteContainer.appendChild(quote);
     quoteContainer.appendChild(quoteAuthor);
     app.appendChild(quoteContainer);
+
+    //Holas
 }
