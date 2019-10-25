@@ -6,7 +6,7 @@ getQuote();
 function getQuote(){
   fetch(apiURL)
     .then((resp) => resp.json()) //Se convierte la respuesta de la peticion a JSON
-    .then(function (response) { //Se crea el
+    .then(function (response) {
         var jsonQuote = response;
         generateQuote(jsonQuote.author,jsonQuote.content);
     })
