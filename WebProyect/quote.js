@@ -1,14 +1,21 @@
-var xmlhttp = new XMLHttpRequest();
 const app = document.getElementById("root");
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var myObj = JSON.parse(this.responseText);
-    generateQuote(myObj.author,myObj.content);
-  }
-};
-xmlhttp.open("GET", "https://api.quotable.io/random", true);
-xmlhttp.send();
+const apiURL = "https://api.quotable.io/random";
+//Una vez que se carga la pagina se ejecuta
+getQuote();
 
+function getQuote(){
+  fetch(apiURL)
+    .then((resp) => resp.json()) //Se convierte la respuesta de la peticion a JSON
+    .then(function (response) { //Se crea el
+        var jsonQuote = response;
+        generateQuote(jsonQuote.author,jsonQuote.content);
+    })
+    .catch(function (err) {
+        console.log("No se puedo obtener el recurso", err);
+    });
+}
+
+//Genera el 'Quote' en la pagina de Inicio
 function generateQuote(author,content){
     const quoteContainer = document.createElement('div');
     quoteContainer.setAttribute('class','quoteContainer');
@@ -21,6 +28,4 @@ function generateQuote(author,content){
     quoteContainer.appendChild(quote);
     quoteContainer.appendChild(quoteAuthor);
     app.appendChild(quoteContainer);
-
-    //Holas
 }
