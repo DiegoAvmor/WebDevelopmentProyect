@@ -7,28 +7,26 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="../styles/signUp.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../scripts/signUp.js" defer></script>
 </head>
 <body>
     
     <div class="container" id="root">
 
         <div id="formContainer">
-            <form action=""> <!--Hay que añadir accion-->
+            <form name="formulario" id="formulario" action="" autocomplete="off"> <!--Hay que añadir accion-->
                 <div class="signUpContainer">
                     <div class="textContent">
-                        <input type="text" name="name" id="name" placeholder="Name">
+                        <input type="text" name="usserName" id="usserName" placeholder="Ussername" required>
                     </div>
                     <div class="textContent">
-                        <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+                        <input type="text" name="email" id="email" placeholder="Email" required>
                     </div>
                     <div class="textContent">
-                        <input type="text" name="usserName" id="usserName" placeholder="Ussername">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="textContent">
-                        <input type="password" name="password" id="password" placeholder="Password">
-                    </div>
-                    <div class="textContent">
-                        <input type="password" name="repeatPass" id="repeatPass" placeholder="Repeat Password">
+                        <input type="password" name="repeatPass" id="repeatPass" placeholder="Repeat Password" required>
                     </div>
                     <input type="submit" value="Sign Up">
                 </div>                            
@@ -40,6 +38,6 @@
         </div>
         
     </div>
-    
+
 </body>
 </html>
