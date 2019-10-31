@@ -7,11 +7,13 @@
     <title>Login</title>
     <link rel="stylesheet" href="../styles/login.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../scripts/login.js" defer></script>
+    <script src="../scripts/quote.js" defer></script>
 </head>
 <body>
     <div class="container" id="root">
         <div id="left">
-            <form action="">
+            <form action="" name="loginForm">
                 <div class="logContainer">
                     <img src="../images/login/personal-user.png" alt="logiImage" id="logIMG" width="118px" height="133px">
                     <div class="textContent">
@@ -22,7 +24,7 @@
                         <i class="material-icons">vpn_key</i>
                         <input type="password" name="password" id="pass" required placeholder="Password">
                     </div>
-                    <input type="submit" value="Login">
+                    <input type="submit" name="submitBtn" value="Login">
                 </div>
             </form>
             <div id="helpBox">
@@ -59,6 +61,5 @@
             <img src="../images/login/london-aerial-thames-guide.webp" alt="image" id="bigImage">
         </div>
     </div>
-    <script src="../scripts/quote.js"></script>
 </body>
 </html>

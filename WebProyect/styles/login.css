@@ -21,6 +21,15 @@ body{
     padding-top: 20%;
 }
 
+/*messagePopUp*/
+#messagePopup{
+   
+    background-color: dodgerblue;
+    height: 20px;
+    width: 60%;
+    margin: auto;
+}
+
 .container > #left .logContainer{
     margin: auto;
     padding: 10px;
