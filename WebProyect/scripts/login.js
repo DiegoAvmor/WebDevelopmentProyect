@@ -5,7 +5,21 @@ const user ="Usuario";
 const contra ="123";
 
 //En el evento de submit se valida el formulario
-submit.onclick = validateForm;
+/*loginForm.onsubmit = function(){
+    ajax("GET","login.php",loginForm.username,loginForm.passwd);
+}
+
+function ajax(method,action,param1,para2){
+    var stringBuilder = "?" + param1.name+"="+param1.value +"&"+ para2.name+"="+para2.value;
+    console.log(stringBuilder);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        var respuesta = this.responseText;
+        alert(respuesta);
+    };
+    xhttp.open(method, action+stringBuilder, true);
+    xhttp.send();
+}*/
 
 function validateForm(){
     if(checkForm()){
@@ -13,8 +27,8 @@ function validateForm(){
             generatePopUpMessage("Nombre de Usuario Incorrecto",loginForm.username);
             return false;
         }
-        if(loginForm.password.value !== contra){
-            generatePopUpMessage("Contraseña Incorrecta",loginForm.password);
+        if(loginForm.passwd.value !== contra){
+            generatePopUpMessage("Contraseña Incorrecta",loginForm.passwd);
             return false;
         }
         return true;
