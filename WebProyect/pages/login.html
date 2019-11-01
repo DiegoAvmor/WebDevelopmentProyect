@@ -13,18 +13,18 @@
 <body>
     <div class="container" id="root">
         <div id="left">
-            <form method="GET" action="../scripts/login.php" name="loginForm">
+            <form name="loginForm">
                 <div class="logContainer">
-                    <img src="../images/login/personal-user.png" alt="logiImage" id="logIMG" width="118px" height="133px">
+                    <img src="../images/login/personal-user.png" alt="loginImage" id="logIMG" width="118px" height="133px">
                     <div class="textContent">
                         <i class="material-icons">account_box</i>
-                        <input type="text" name="username" id="user" required placeholder="Username">
+                        <input type="text" name="username" id="user" placeholder="Username" required>
                     </div>
                     <div class="textContent">
                         <i class="material-icons">vpn_key</i>
-                        <input type="password" name="passwd" id="pass" required placeholder="Password">
+                        <input type="password" name="passwd" id="pass" placeholder="Password" required>
                     </div>
-                    <input type="submit" name="submitBtn" value="Login">
+                    <input type="submit" value="Login">
                 </div>
             </form>
             <div id="helpBox">
