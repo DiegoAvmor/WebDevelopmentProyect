@@ -1,54 +1,41 @@
 const containerMessage = document.getElementById("left");
-const submit = loginForm.submitBtn;
-//Estas constantes on de prueba
-const user ="Usuario";
-const contra ="123";
+const username = loginForm.username;
+const password = loginForm.passwd;
 
-//En el evento de submit se valida el formulario
-/*loginForm.onsubmit = function(){
-    ajax("GET","login.php",loginForm.username,loginForm.passwd);
+//En el evento de submit hacemos una peticion POST para validar al usuario
+loginForm.onsubmit = function(){
+    event.preventDefault();//Evita que se haga el envio del formulario
+    let stringBuilder = username.name+"="+username.value +"&"+ password.name+"="+password.value;
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           handleResponse(this.responseText);
+        }
+    }
+    xmlhttp.open("post", "../scripts/login.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(stringBuilder);
 }
 
-function ajax(method,action,param1,para2){
-    var stringBuilder = "?" + param1.name+"="+param1.value +"&"+ para2.name+"="+para2.value;
-    console.log(stringBuilder);
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        var respuesta = this.responseText;
-        alert(respuesta);
-    };
-    xhttp.open(method, action+stringBuilder, true);
-    xhttp.send();
-}*/
-
-function validateForm(){
-    if(checkForm()){
-        if(loginForm.username.value !== user){
-            generatePopUpMessage("Nombre de Usuario Incorrecto",loginForm.username);
-            return false;
+//Funcion que manejara las acciones correspondientes a la respuesta del servidor
+function handleResponse(response){
+    let parsedResponse = null;
+    try{
+        parsedResponse = JSON.parse(response);
+        if(parsedResponse.ok){
+            //Exito, entonces se carga la pagina principal
+            document.location = parsedResponse.mensaje;
+        }else{
+            generatePopUpMessage(parsedResponse.mensaje);
         }
-        if(loginForm.passwd.value !== contra){
-            generatePopUpMessage("Contraseña Incorrecta",loginForm.passwd);
-            return false;
-        }
-        return true;
+    } catch{
+        console.log("No se pudo convertir a objeto");
     }
 }
 
-function checkForm(){
-    var inputs = loginForm.getElementsByTagName('input');
-    for (var i = 0; i < inputs.length; i++) {
-        if(inputs[i].hasAttribute("required")){
-            if(inputs[i].value == ""){
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
 
-function generatePopUpMessage(message, object){
+function generatePopUpMessage(message){
     let messageDiv = document.createElement('div');
     let messageP = document.createElement('p');
     messageP.innerHTML = message;
@@ -56,8 +43,6 @@ function generatePopUpMessage(message, object){
     messageDiv.appendChild(messageP);
     messageDiv.setAttribute('id','messagePopup');
     containerMessage.appendChild(messageDiv);
-    //Se hace focus al objeto
-    object.focus();
     //Se elimina despues de cierto tiempo
     setTimeout(destroyPopUp,5000,messageDiv);
 }
