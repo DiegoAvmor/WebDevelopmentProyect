@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+		body{	
+			--font: 'Roboto', sans-serif;
+    		--textColor: whitesmoke;		
+			margin: 0%;
+			padding: 0%;
+			width :100%;
+			height: 100vh;
+			overflow: hidden;
+			
+		}
+		#blackBG{
+			pointer-events: none;
+			height: 100%;
+			width: 75%;
+			position: fixed;
+			background-color: black;
+			opacity: .5;
+			z-index: 2;
+			display: none;
+		}
+		#navTitle{
+			font-family: var(--font);
+    		color: var(--textColor);
+    		font-size: 46px;
+    		font-weight: bold;
+			width: 25%;
+			float: left;
+		}
+		#userPanel{
+			display: none;
+			font-family: var(--font);
+    		color: var(--textColor);
+    		font-size: 20px;
+			position: fixed;
+			width: 25%;
+			margin-left: 75%;
+			height:100%;
+			background-color: #61616b;
+			z-index: 3;
+		}
+		#userName{
+			margin-top: 0px;
+			text-align: center;
+			font-size: 35px;
+			margin-left: 0px;
+		}
+		#userText p{
+			margin-top: 5px;
+		}
+		#userText{
+			margin-left: 20px;
+		}
+		#userImagePane img{
+			margin-top: 5%;
+			margin-left: 23%;
+			border-radius: 50%;
+			width: 230px;
+			background-color: white;
+		}
+		#userImagePane{
+
+			background-color: #61616b;
+		}
+		#searchBar{
+			float: left;
+			width: 72%;
+			
+		}
+		#searchB{
+			margin-left: 10px;
+			width:185px;
+			border-style: none;
+			
+		}
+		#searchB:focus {outline:none;}
+		#searchInput{
+			margin-top: 2vh;
+			
+			border-radius: 15px;
+			width: 230px;
+			background-color: white;
+		}
+		#userInfo{
+			width: auto;
+			float: left;
+			margin: 0%;
+			padding: 0%;
+		}
+		#userInfo img{
+
+			margin: auto;
+			  	height: 43px;
+  				width: 43px;
+  			border-radius: 50%;
+  			
+		}
+		#navBar{
+			z-index: 1;
+			position: fixed;
+			width: 100%;
+			height: 6vh;
+			background-color: #3c3c42;
+		}
+		#gameContainer{
+			background-image: url("../images/main/8bitBG.jpg");
+  			background-repeat: no-repeat;
+  			background-attachment: fixed;
+			margin-right: 0%;
+			margin-top: 26PX;
+			height: 94.5%;
+			
+			overflow-y: auto;
+			background-color: #508AA8;
+		}
+		.gameInfo{
+			background-color: #61616b;
+			color: #3c3c42;
+			
+			
+			box-shadow:inset 0px 0px 0px 10px;
+			margin-top: 20px;
+			margin-left: 40px;
+			width: 45%;
+			float: left;
+			
+		}
+		.gameImage img{
+			height: 250px;
+			width: auto;
+			
+		}
+		.gameImage{
+			width: auto;
+			height: 250px;
+			float: left;
+		}
+		.gameText{
+			margin-top: 8%;
+			font-family: var(--font);
+    		color: var(--textColor);
+			margin-left: 30%;
+			width: auto;
+			
+		}
+		.gameTitle{
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.gameDescription{
+			width: 100%;
+			
+		}
