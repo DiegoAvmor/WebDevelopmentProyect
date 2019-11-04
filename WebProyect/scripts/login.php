@@ -20,7 +20,7 @@ $resultado = mysqli_query($conexion, $sql);
 mysqli_close($conexion);
 
 if (mysqli_num_rows($resultado) > 0) {
-	$mensaje = '../pages/signup.html';
+	$mensaje = '../pages/signUp.html';
 	//header("location: ../pages/signup.html");
 } else {
 	$ok = false;
