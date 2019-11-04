@@ -119,8 +119,7 @@
 		}
 		.gameImage img{
 			height: 250px;
-			width: auto;
-
+			width: 350px;
 		}
 		.gameImage{
 			width: auto;
@@ -145,9 +144,8 @@
 		}
 		.gameDescription{
 			width:auto;
-			overflow-y: hidden;
+			overflow: hidden;
 			position: relative;
 			height: 130px;
 			max-height: 130px;
-
 		}
