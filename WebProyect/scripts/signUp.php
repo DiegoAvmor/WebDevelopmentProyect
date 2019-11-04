@@ -1,16 +1,11 @@
 <?php
-//Datos necesarios para establecer la conexion con la base de datos
-$server = "127.0.0.1";
-$username = "carlos";
-$password = "";
-$database = "videogameswebservice";
-
+include "db.php";
 //Response
 $ok = true;
 $message = '';
 
 //Sentencia para la conexion de la base de datos
-$conection = mysqli_connect($server, $username, $password, $database);
+$conection = connectMysqli();
 
 //Verificamos que no hubiera problema en la conexion
 if (!$conection) {
@@ -28,7 +23,7 @@ if(mysqli_num_rows($result) <= 0){
 	} 
 }else {
 	$ok = false;
-	$message = 'Usuario o contraseña ya utilizados';
+	$message = 'Usuario o correo ya utilizados';
 }
 
 //Terminamos la conexion con la base de datos
