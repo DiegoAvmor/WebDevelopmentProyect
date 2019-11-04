@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-		body{	
+		body{
 			--font: 'Roboto', sans-serif;
-    		--textColor: whitesmoke;		
+    		--textColor: whitesmoke;
 			margin: 0%;
 			padding: 0%;
 			width :100%;
 			height: 100vh;
 			overflow: hidden;
-			
+
 		}
 		#blackBG{
 			pointer-events: none;
@@ -102,7 +102,7 @@
 			margin-right: 0%;
 			margin-top: 26PX;
 			height: 94.5%;
-			
+
 			overflow-y: auto;
 			background-color: #508AA8;
 		}
@@ -113,32 +113,41 @@
 			margin-top: 20px;
 			margin-left: 40px;
 			width: 45%;
+			height: 280px;
 			float: left;
-			
+
 		}
 		.gameImage img{
 			height: 250px;
 			width: auto;
-			
+
 		}
 		.gameImage{
 			width: auto;
 			height: 250px;
 			float: left;
+			position: relative;
+  		left: 15px;
+			top: 15px;
 		}
 		.gameText{
-			margin-top: 8%;
+			position: relative;
+			top: 25px;
 			font-family: var(--font);
     		color: var(--textColor);
-			margin-left: 30%;
-			width: auto;
-			
+			left: 50px;
+			width: 90%;
+
 		}
 		.gameTitle{
 			font-size: 20px;
 			font-weight: bold;
 		}
 		.gameDescription{
-			width: 100%;
-			
+			width:auto;
+			overflow-y: hidden;
+			position: relative;
+			height: 130px;
+			max-height: 130px;
+
 		}
