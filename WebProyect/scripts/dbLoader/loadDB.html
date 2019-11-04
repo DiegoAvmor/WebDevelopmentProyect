@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="LoadDB" id="loadbtn">
+    <script>
+        let button = document.getElementById("loadbtn");
+        button.onclick = function(){
+            
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                    let json = JSON.parse(this.responseText);
+                    console.log(json);
+                    loadtDB(json);
+                }
+            }
+            xmlhttp.open("GET", "https://api.rawg.io/api/games?page_size=100", true);
+            xmlhttp.send();
+        }
+
+        function loadtDB(json){
+            json.results.forEach(element => {
+                    var id = element.id;
+                    var name = element.name;
+                    var released = element.released;
+                    var rating = element.rating;
+                    var rating_top = element.rating_top;
+                    var ratings_count = element.ratings_count;
+                    var playtime = element.playtime;
+                    let stringBuilder = "id="+id+
+                                        "&gameName="+name+
+                                        "&released="+released+
+                                        "&rating="+rating+
+                                        "&rating_top="+rating_top+
+                                        "&ratings_count="+ratings_count+
+                                        "&playtime="+playtime;
+                    let xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                            console.log(this.responseText);
+                        }
+                    }
+                    xmlhttp.open("post", "../scripts/loadDB.php", true);
+                    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(stringBuilder);
+            });
+        }
+    </script>
+</body>
+</html>
