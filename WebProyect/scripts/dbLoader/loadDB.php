@@ -10,18 +10,10 @@ if (!$conexion) {
 }
 
 //Sentencia SQL
-$sql = "INSERT INTO videogame ( ClvJuego, NombreJuego , FLanzamiento , Rating , RatingTop , TotalRating , PlayTime ) VALUES ('{$_POST['id']}', '{$_POST['gameName']}', '{$_POST['released']}', '{$_POST['rating']}', '{$_POST['rating_top']}', '{$_POST['ratings_count']}', '{$_POST['playtime']}')";
+$sql = "INSERT INTO videogame ( ClvJuego, NombreJuego , FLanzamiento , Rating , RatingTop , PlayTime , imagen , descripcion ) VALUES ('{$_POST['id']}', '{$_POST['gameName']}', '{$_POST['released']}', '{$_POST['rating']}', '{$_POST['rating_top']}', '{$_POST['playtime']}', '{$_POST['imageURL']}', '{$_POST['descrip']}')";
 
-$resultado = mysqli_query($conexion, $sql);
+mysqli_query($conexion, $sql);
 mysqli_close($conexion);
-
-if (mysqli_num_rows($resultado) > 0) {
-	$mensaje = '../pages/signUp.html';
-} else {
-	$ok = false;
-	$mensaje = 'Usuario o Contraseña incorrecta';
-	//header("location: ../pages/login.html");
-}
 
 
 ?>
