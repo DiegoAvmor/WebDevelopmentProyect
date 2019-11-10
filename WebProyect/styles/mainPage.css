@@ -7,9 +7,6 @@ body{
 #container{  
     --font: 'Roboto', sans-serif;
     --textColor: whitesmoke;  
-    width :100%;
-    height: 150vh;
-    overflow: hidden;
     background-color: #626267;
 }
 /*Aqui comienza la barra de arriba*/
@@ -18,49 +15,53 @@ body{
     color: var(--textColor);
     font-size: 46px;
     font-weight: bold;
-    width: 25%;
-    float: left;
 }
-#navBar{
-    z-index: 1;
+#navBar{/*Estado default de la barra de navegacion*/
     position: fixed;
-    background-color: #3c3c42;
-    display: inline-flexbox;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto 15%;
+    background-color: transparent;
     width: 100%;
-    grid-template-columns: auto auto 5%;
+    transition: .8s;
 }
+
 #infoBox{
-    float: right;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-gap: 30px;
 }
 
 /*Aqui termina la barra de arriba*/
 
 #mainpage{
-    position: absolute;
     width: 100%;
     top: 50px;
     display: flexbox;
 }
-#optionBar{
+#optionBox{
+    padding: auto;
     width: 100%;
-    height: 50px;
     background-color: #3c3c42;
-    padding-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
 }
+#optionBox > a{
+    margin: auto;
+    text-decoration: none;
+}
+
 .box{
-    background-color: #3c3c42;
-    display: inline-block;
     font-family: var(--font);
     color: var(--textColor);
-    padding-left: 15px;
-    padding-top: 10px;
-    width: 80px;
-    height: 40px;
 }
 .box:hover{
-    background-color: #151520;
+    cursor: pointer;
+    text-decoration-line: underline;
 }
-#readme{
+.info{
     text-align: center;
 }
 .text{    
@@ -72,14 +73,17 @@ body{
 }
 #mainImg > div#textBox{
     position: absolute;
-    width: 500px;
+    width: 50%;
     height: 130px;
-    top: 30px;
-    left: 50px;
+    top: 25%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
     border-radius: 25px;
     background-color: #3c3c42;
-    padding-left: 20px;
     opacity: .8;
+    align-content: center;
 }
 h1{
     font-family: var(--font);
