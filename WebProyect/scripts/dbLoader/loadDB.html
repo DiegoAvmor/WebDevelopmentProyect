@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="LoadDB" id="loadbtn">
+    <input type="button" value="LoadGen" id="loadgen">
+    <script>
+        let button = document.getElementById("loadbtn");
+        let genbtn = document.getElementById("loadgen");
+        button.onclick = function(){
+            
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                    let json = JSON.parse(this.responseText);
+                    loadtDB(json);
+                }
+            }
+            xmlhttp.open("GET", "https://api.rawg.io/api/games", true);
+            xmlhttp.send();
+        }
+
+        genbtn.onclick = function(){
+            
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                    let json = JSON.parse(this.responseText);
+                    loadGenres(json);
+                }
+            }
+            xmlhttp.open("GET", "https://api.rawg.io/api/genres", true);
+            xmlhttp.send();
+        }
+
+        function loadGenres(json){
+            json.results.forEach(element => {
+                    var id = element.id;
+                    var name = element.name;
+                    var slugName = element.slug;
+                    let stringBuilder = "id="+id+
+                                        "&genreName="+name+
+                                        "&slug="+slugName;
+                    ajaxPOST("../scripts/loadgenres.php",stringBuilder);
+            });
+        }
+
+        function loadtDB(json){
+            json.results.forEach(element => {
+                getGameInfo(element.id);
+            });
+        }
+
+        function getGameInfo(id){
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //Se añade los juegos a la tabla videogames
+                    let json = JSON.parse(this.responseText);
+                    var id = json.id;
+                    var name = json.name;
+                    var released = json.released;
+                    var rating = json.rating;
+                    var rating_top = json.rating_top;
+                    var playtime = json.playtime;
+                    var imageURL = json.background_image;
+                    var description = json.description;
+                    let stringBuilder = "id="+id+
+                                            "&gameName="+name+
+                                            "&released="+released+
+                                            "&rating="+rating+
+                                            "&rating_top="+rating_top+
+                                            "&playtime="+playtime+
+                                            "&imageURL="+imageURL+
+                                            "&descrip="+description;
+                    ajaxPOST("../scripts/loadDB.php",stringBuilder);
+                    //Añadir a relacion juego-generos
+                    json.genres.forEach(genre => {
+                        let param = "gameID="+ id + "&genreID=" +genre.id;
+                        ajaxPOST("../scripts/loadgenregame.php",param);
+                    });
+                }
+            }
+            xmlhttp.open("GET", "https://api.rawg.io/api/games/"+ id, true);
+            xmlhttp.send();
+        }
+
+        function ajaxPOST(fileDir,param){
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("post", fileDir, true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send(param);
+        }
+    </script>
+</body>
+</html>

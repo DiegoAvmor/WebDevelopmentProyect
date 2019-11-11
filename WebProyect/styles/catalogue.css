@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-		body{	
+		body{
 			--font: 'Roboto', sans-serif;
-    		--textColor: whitesmoke;		
+    		--textColor: whitesmoke;
 			margin: 0%;
 			padding: 0%;
 			width :100%;
 			height: 100vh;
 			overflow: hidden;
-			
+
 		}
 		#blackBG{
 			pointer-events: none;
@@ -59,48 +59,41 @@
 			background-color: white;
 		}
 		#userImagePane{
-
 			background-color: #61616b;
 		}
 		#searchBar{
 			float: left;
-			width: 72%;
-			
 		}
 		#searchB{
 			margin-left: 10px;
-			width:185px;
 			border-style: none;
-			
 		}
+
 		#searchB:focus {outline:none;}
+
 		#searchInput{
 			margin-top: 2vh;
-			
 			border-radius: 15px;
 			width: 230px;
 			background-color: white;
 		}
 		#userInfo{
-			width: auto;
-			float: left;
-			margin: 0%;
-			padding: 0%;
+			float: right;
+			margin: auto;
 		}
 		#userInfo img{
-
 			margin: auto;
 			  	height: 43px;
   				width: 43px;
   			border-radius: 50%;
-  			
 		}
 		#navBar{
 			z-index: 1;
 			position: fixed;
 			width: 100%;
-			height: 6vh;
 			background-color: #3c3c42;
+			display: grid;
+			grid-template-columns: auto auto 5%;
 		}
 		#gameContainer{
 			background-image: url("../images/main/8bitBG.jpg");
@@ -109,45 +102,50 @@
 			margin-right: 0%;
 			margin-top: 26PX;
 			height: 94.5%;
-			
+
 			overflow-y: auto;
 			background-color: #508AA8;
 		}
 		.gameInfo{
 			background-color: #61616b;
 			color: #3c3c42;
-			
-			
 			box-shadow:inset 0px 0px 0px 10px;
 			margin-top: 20px;
 			margin-left: 40px;
 			width: 45%;
+			height: 280px;
 			float: left;
-			
+
 		}
 		.gameImage img{
 			height: 250px;
-			width: auto;
-			
+			width: 350px;
 		}
 		.gameImage{
 			width: auto;
 			height: 250px;
 			float: left;
+			position: relative;
+  		left: 15px;
+			top: 15px;
 		}
 		.gameText{
-			margin-top: 8%;
+			position: relative;
+			top: 25px;
 			font-family: var(--font);
     		color: var(--textColor);
-			margin-left: 30%;
-			width: auto;
-			
+			left: 50px;
+			width: 90%;
+
 		}
 		.gameTitle{
 			font-size: 20px;
 			font-weight: bold;
 		}
 		.gameDescription{
-			width: 100%;
-			
+			width:auto;
+			overflow: hidden;
+			position: relative;
+			height: 130px;
+			max-height: 130px;
 		}
