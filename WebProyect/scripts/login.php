@@ -1,26 +1,20 @@
 <?php
 include "db.php";
+include "sessionManager.php";
 //Response
 $ok = true;
 $mensaje = '';
 
-$conexion = connectMysqli();
-if (!$conexion) {
-    die("Fallo: " . mysqli_connect_error());
-}
-
 //Sentencia SQL
 $sql = "SELECT username, passwd FROM usuarios WHERE username = '{$_POST['username']}' AND passwd = '{$_POST['passwd']}' ";
+$resultado = ConsultaSQL($sql);
 
-$resultado = mysqli_query($conexion, $sql);
-mysqli_close($conexion);
-
-if (mysqli_num_rows($resultado) > 0) {
-	$mensaje = '../pages/signUp.html';
+if(count($resultado)>0){
+	startSession("user",$_POST['username']);//Iniciamos Session
+	$mensaje = '../pages/catalogue.html';
 } else {
 	$ok = false;
 	$mensaje = 'Usuario o Contraseña incorrecta';
-	//header("location: ../pages/login.html");
 }
 
 //Respuesta en formato json
@@ -31,6 +25,4 @@ echo json_encode(
 	)
 );
 
-//echo date("jS F, Y", strtotime("11-12-10"));
-// outputs 11th December, 2010 
 ?>
