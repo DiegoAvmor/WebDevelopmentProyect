@@ -74,6 +74,7 @@ function generateGame(image,name,date,developer,genre,description){
 window.onload= function(){
 	fetchGameList();
 	userPaneSetup();
+	inactivityTime();
 }
 
 function userPaneSetup(){
@@ -96,3 +97,25 @@ function userPaneSetup(){
 		document.getElementById("userInfo").style.backgroundColor= '#3c3c42';
 	}
 }
+
+//Inactividad del usuario
+var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+	document.onkeypress = resetTimer;
+	document.onclick = resetTimer;
+	window.addEventListener('scroll', resetTimer, true);
+
+    function logout() {
+		document.location = '../pages/login.html';
+		//Hacer la parte de cierre de session
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+		time = setTimeout(logout, 60000);
+		//60,0000  = 1 minuto
+    }
+};
