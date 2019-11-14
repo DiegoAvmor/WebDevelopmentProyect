@@ -7,8 +7,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="../styles/login.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="../scripts/login.js?id=1" defer></script>
-    <script src="../scripts/quote.js?id=2" defer></script>
+    <script src="../scripts/login.js" defer></script>
+    <script src="../scripts/quote.js" defer></script>
 </head>
 <body>
     <div class="container" id="root">
@@ -23,6 +23,10 @@
                     <div class="textContent">
                         <i class="material-icons">vpn_key</i>
                         <input type="password" name="passwd" id="pass" placeholder="Password" required>
+                    </div>
+                    <div id="remeberDiv">
+                        <input type="checkbox" id="rememberbox">
+                        Remember Me
                     </div>
                     <input type="submit" value="Login">
                 </div>
