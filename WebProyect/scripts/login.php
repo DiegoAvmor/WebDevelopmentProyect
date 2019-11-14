@@ -1,18 +1,28 @@
 <?php
 include "db.php";
-include "sessionManager.php";
+include "sanitizeValidate.php";
+
+//HTTP POST INFO
+$username = cleanVariable($_POST['username']);
+$passwd = cleanVariable($_POST['passwd']);
 //Response
 $ok = true;
 $mensaje = '';
 
 //Sentencia SQL
-$sql = "SELECT username, passwd FROM usuarios WHERE username = '{$_POST['username']}' AND passwd = '{$_POST['passwd']}' ";
+$sql = "SELECT username FROM usuarios WHERE username = '{$username}' AND passwd = '{$passwd}' ";
 $resultado = ConsultaSQL($sql);
-
+if(session_status() == PHP_SESSION_ACTIVE ){
+	session_destroy();
+}else{
+	session_start();
+}
 if(count($resultado)>0){
-	startSession("user",$_POST['username']);//Iniciamos Session
-	$mensaje = '../pages/catalogue.html';
+	$_SESSION["status"] = true;
+	$_SESSION["user"] = $username;
+	$mensaje = '../pages/catalogue.html?id='.$username;
 } else {
+	$_SESSION["status"] = false;
 	$ok = false;
 	$mensaje = 'Usuario o Contraseña incorrecta';
 }
