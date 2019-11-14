@@ -81,21 +81,22 @@ window.onload= function(){
 	inactivityTime();
 }
 
+//Lazy loading
 document.addEventListener("DOMContentLoaded", function() {
-	var lazyBackgrounds = [].slice.call(document.querySelectorAll(".gameInfo"));
+	var games = [].slice.call(document.querySelectorAll(".gameInfo"));
   
 	if ("IntersectionObserver" in window) {
-	  let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+	  let lazygameObserver = new IntersectionObserver(function(entries, observer) {
 		entries.forEach(function(entry) {
 		  if (entry.isIntersecting) {
 			entry.target.classList.add("visible");
-			lazyBackgroundObserver.unobserve(entry.target);
+			lazygameObserver.unobserve(entry.target);
 		  }
 		});
 	  });
   
-	  lazyBackgrounds.forEach(function(lazyBackground) {
-		lazyBackgroundObserver.observe(lazyBackground);
+	  games.forEach(function(game) {
+		lazygameObserver.observe(game);
 	  });
 	}
   });
