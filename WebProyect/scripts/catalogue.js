@@ -1,4 +1,5 @@
 const app = document.getElementById("gameContainer");
+const loadIcon = document.getElementById("loadingIcon");
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
@@ -64,18 +65,40 @@ function generateGame(image,name,date,developer,genre,description){
 
 	app.appendChild(gameInfo);
 	gameInfo.appendChild(gameImage);
+	gameImage.appendChild(gameTitle);
 	gameImage.appendChild(cover);
 	gameInfo.appendChild(gameText);
-	gameText.appendChild(gameTitle);
+	//gameText.appendChild(gameTitle);
 	gameText.appendChild(gameData);
 	gameText.appendChild(gameDescription);
 }
 
 window.onload= function(){
+	loadIcon.removeAttribute('hidden');//Hacemos visible el icono de carga
 	fetchGameList();
+	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
 	inactivityTime();
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+	var lazyBackgrounds = [].slice.call(document.querySelectorAll(".gameInfo"));
+  
+	if ("IntersectionObserver" in window) {
+	  let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+		entries.forEach(function(entry) {
+		  if (entry.isIntersecting) {
+			entry.target.classList.add("visible");
+			lazyBackgroundObserver.unobserve(entry.target);
+		  }
+		});
+	  });
+  
+	  lazyBackgrounds.forEach(function(lazyBackground) {
+		lazyBackgroundObserver.observe(lazyBackground);
+	  });
+	}
+  });
 
 function userPaneSetup(){
 	document.getElementById("userImage").onclick= function(){
