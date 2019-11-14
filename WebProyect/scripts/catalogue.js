@@ -1,5 +1,6 @@
 const app = document.getElementById("gameContainer");
 const loadIcon = document.getElementById("loadingIcon");
+validateUser();//Validamos antes si es un usuario valido
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
@@ -104,15 +105,15 @@ document.addEventListener("DOMContentLoaded", function() {
 function userPaneSetup(){
 	document.getElementById("userImage").onclick= function(){
 		document.getElementById("blackBG").style.display = 'block';
-	document.getElementById("userPanel").style.display = 'block';
+		document.getElementById("userPanel").style.display = 'block';
 	}
 	document.getElementById("gameContainer").onclick= function(){
-	document.getElementById("blackBG").style.display = 'none';
-	document.getElementById("userPanel").style.display = 'none';
+		document.getElementById("blackBG").style.display = 'none';
+		document.getElementById("userPanel").style.display = 'none';
 	}
 	document.getElementById("searchBar").onclick= function(){
-	document.getElementById("userPanel").style.display = 'none';
-	document.getElementById("blackBG").style.display = 'none';
+		document.getElementById("userPanel").style.display = 'none';
+		document.getElementById("blackBG").style.display = 'none';
 	}
 	document.getElementById("userInfo").onmouseover= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#61616b';
@@ -120,6 +121,38 @@ function userPaneSetup(){
 	document.getElementById("userInfo").onmouseout= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#3c3c42';
 	}
+}
+
+function validateUser(){
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			try{
+				jsonresponse = JSON.parse(this.responseText);
+				if(!jsonresponse.ok){//Si no tiene acceso lo redirigimos al login
+					document.location = jsonresponse.mensaje;
+				}else{
+					//Podemos hacer que muestre un pop up con el mensaje
+					//de bienvenida que nosotros regresamos o cargamos la info del usuario aqui
+					console.log(jsonresponse.mensaje);
+				}
+			} catch{
+				console.log(this.responseText);
+			}
+        }
+	}
+	let url = new URLSearchParams(window.location.search);
+	let urlValue = "../scripts/validateUser.php";
+	if(url.has('id')){
+		urlValue +="?id="+ url.get('id');
+	}
+    xmlhttp.open("get", urlValue, true);
+    xmlhttp.send();
+}
+
+function logout() {
+	document.location = '../pages/login.html';
+	//Hacer la parte de cierre de session
 }
 
 //Inactividad del usuario
@@ -131,11 +164,6 @@ var inactivityTime = function () {
 	document.onkeypress = resetTimer;
 	document.onclick = resetTimer;
 	window.addEventListener('scroll', resetTimer, true);
-
-    function logout() {
-		document.location = '../pages/login.html';
-		//Hacer la parte de cierre de session
-    }
 
     function resetTimer() {
         clearTimeout(time);
