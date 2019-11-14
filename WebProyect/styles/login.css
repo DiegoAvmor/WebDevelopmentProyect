@@ -42,6 +42,11 @@ i{
     color: white;
 }
 
+div#remeberDiv{
+    font-family: 'Roboto', sans-serif;
+    color: aliceblue;
+}
+
 .container>#right{
     overflow: hidden;
 }
@@ -110,7 +115,7 @@ left: 110px;
 input{
     border-radius: 25px;
     border: none;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 }
 
 .textContent > input{
