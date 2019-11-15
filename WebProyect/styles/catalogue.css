@@ -7,7 +7,6 @@
 			width :100%;
 			height: 100vh;
 			overflow: hidden;
-
 		}
 		#blackBG{
 			pointer-events: none;
@@ -61,8 +60,13 @@
 		#userImagePane{
 			background-color: #61616b;
 		}
+
 		#searchBar{
-			float: left;
+			margin: auto;
+		}
+
+		#searchBar > i{
+			position: absolute;
 		}
 		#searchB{
 			margin-left: 10px;
@@ -71,11 +75,13 @@
 
 		#searchB:focus {outline:none;}
 
-		#searchInput{
-			margin-top: 2vh;
+		#searchBar > input{
+			margin: auto;
 			border-radius: 15px;
 			width: 230px;
+			height: 20px;
 			background-color: white;
+			padding-left: 30px;
 		}
 		#userInfo{
 			float: right;
@@ -126,7 +132,7 @@
 			height: 250px;
 			float: left;
 			position: relative;
-  		left: 15px;
+  			left: 15px;
 			top: 15px;
 		}
 		.gameText{
@@ -139,13 +145,41 @@
 
 		}
 		.gameTitle{
+			font-family: var(--font);
+    		color: var(--textColor);
+			position: absolute;
+			width: 100%;
+			bottom: 0px;
 			font-size: 20px;
 			font-weight: bold;
+			background-color: 	rgb(0, 0, 0,.8);/*fondo con opacidad*/
 		}
 		.gameDescription{
-			width:auto;
 			overflow: hidden;
 			position: relative;
 			height: 130px;
 			max-height: 130px;
 		}
+
+		#loadingIcon:not([hidden]) {
+			font-size: 30px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			animation: spin 1s infinite linear
+		  }
+		  
+		  
+		  @keyframes spin {
+			from {
+			  transform: rotate(0deg);
+			}
+			to {
+			  transform: rotate(360deg);
+			}
+		  }

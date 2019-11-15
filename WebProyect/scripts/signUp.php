@@ -1,5 +1,11 @@
 <?php
 include "db.php";
+include "sanitizeValidate.php";
+
+//HTTP POST Info
+$username = cleanVariable($_POST['userName']);
+$passwd = cleanVariable($_POST['pass']);
+$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 //Response
 $ok = true;
 $message = '';
@@ -12,12 +18,11 @@ if (!$conection) {
     die( "Fallo: ".mysqli_connect_error());
 }
 
-$isAvailable = "SELECT username, passwd FROM usuarios WHERE username = '{$_POST['userName']}' OR email = '{$_POST['email']}' ";
+$isAvailable = "SELECT username, passwd FROM usuarios WHERE username = '{$username}' OR email = '{$email}' ";
 $result = mysqli_query($conection, $isAvailable);
 
 if(mysqli_num_rows($result) <= 0){
-	$sql = "INSERT INTO usuarios (username, email, passwd)
-	VALUES ('{$_POST['userName']}', '{$_POST['email']}', '{$_POST['pass']}')";
+	$sql = "INSERT INTO usuarios (username, email, passwd) VALUES ('{$username}', '{$email}', '{$passwd}')";
 	if (mysqli_query($conection, $sql)) {
 		$message = '../pages/login.html';
 	} 
