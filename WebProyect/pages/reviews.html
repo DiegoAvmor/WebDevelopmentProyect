@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../scripts/reviews.js?id=1" defer></script>
+</head>
+<body>
+    <div id="root" name="root">
+        <form name="reviewForm">
+            Title
+            <input type="text" name="title" id="title"><br>
+            <textarea name="review" id="review" cols="30" rows="10"></textarea><br>
+            <select name="rating" id="rating" required>
+                <option value="">None</option>
+                <option value="1">skip</option>
+                <option value="2">bad</option>
+                <option value="3">meh</option>
+                <option value="4">recommended</option>
+                <option value="5">exceptional</option5>
+            </select>
+            <input type="submit" value="Subir Formulario">
+        </form>
+    </div>
+    <br>
+    <textarea name="answer" id="answer" cols="30" rows="10"></textarea>
+
+    <!--{"id":4,"title":"recommended","count":275,"percent":60.04},
+        {"id":3,"title":"meh","count":91,"percent":19.87},
+        {"id":5,"title":"exceptional","count":74,"percent":16.16},
+        {"id":1,"title":"skip","count":18,"percent":3.93}],-->
+</body>
+</html>
