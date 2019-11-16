@@ -1,6 +1,44 @@
 const app = document.getElementById("gameContainer");
 const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
+fetchUserData();
+fetchUserGames();
+
+function fetchUserData(){
+	let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+		   let json = JSON.parse(this.responseText);
+		   console.log(json);
+		   let jsonM = JSON.parse(json.mensaje);
+		   console.log(jsonM.username);
+		   console.log(jsonM.email);
+		   console.log(jsonM.passwd);
+        }
+    }
+    xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
+    xmlhttp.send();
+}
+
+function fetchUserGames(){
+	let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			let json = JSON.parse(this.responseText);
+			console.log(json);
+			if(json.ok){
+				let jsonM = JSON.parse(json.mensaje);
+				jsonM.forEach(games => {
+					console.log(games.gameid);
+				});
+			}else{
+				console.log(json.mensaje);
+			}
+        }
+    }
+    xmlhttp.open("GET", "../scripts/userInformation.php?action=user_fav", true);
+    xmlhttp.send();
+}
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
