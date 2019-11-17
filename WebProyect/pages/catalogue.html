@@ -3,7 +3,7 @@
 <head>
 	<title>Catalogue</title>
 	<link rel="stylesheet" type="text/css" href="../styles/catalogue.css">
-	<script type="text/javascript" src="../scripts/catalogue.js" defer></script>
+	<script type="text/javascript" src="../scripts/catalogue.js?id" defer></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -13,9 +13,8 @@
 			VIDEOGAMES
 		</div>
 		<div id="searchBar">
-			<div id="searchInput">
-				🔍<input type="text" name="search" id="searchB" placeholder="Search Videogames">
-			</div>
+			<i class="material-icons">search</i>
+			<input type="text" name="search" id="searchB" placeholder="Search Videogames">
 		</div>
 
 		<div id="userInfo">
@@ -58,7 +57,7 @@
 
 	</div>
 	&nbsp;
-	<div id="gameContainer">
-	</div>
+	<div id="gameContainer"></div>
+	<div id="loadingIcon" hidden>(ㆆ _ ㆆ)</div>
 </body>
 </html>

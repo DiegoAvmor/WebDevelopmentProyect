@@ -1,6 +1,11 @@
 const containerMessage = document.getElementById("left");
-const username = loginForm.username;
-const password = loginForm.passwd;
+let username = loginForm.username;
+let password = loginForm.passwd;
+const checkbtn = document.getElementById("rememberbox");
+
+//Cargamos la informacion en los campos si este tiene
+loadInput();
+
 
 //En el evento de submit hacemos una peticion POST para validar al usuario
 loginForm.onsubmit = function(){
@@ -24,12 +29,33 @@ function handleResponse(response){
         parsedResponse = JSON.parse(response);
         if(parsedResponse.ok){
             //Exito, entonces se carga la pagina principal
+            saveInput(checkbtn);
             document.location = parsedResponse.mensaje;
         }else{
             generatePopUpMessage(parsedResponse.mensaje);
         }
     } catch{
-        console.log("No se pudo convertir a objeto");
+        console.log(response);
+    }
+}
+
+//Funcion que almacena la informacion usando local storage, hace la funcion de 'Remember Me'
+function saveInput(checkbox){
+    if(checkbox.checked){//Esta seleccionada, guardamos la informacion
+        localStorage.setItem("userN",username.value);
+        localStorage.setItem("userP",password.value);
+    }else{//No esta seleccionada, eliminamos la informacion
+        localStorage.removeItem("userN");
+        localStorage.removeItem("userP");
+    }
+}
+
+//Funcion que llena los campos con lo almacenado en el local storage
+function loadInput(){
+    if(localStorage.hasOwnProperty("userN") && localStorage.hasOwnProperty("userP")){
+        username.value = localStorage.getItem("userN");
+        password.value = localStorage.getItem("userP");
+        checkbtn.checked = true;
     }
 }
 

@@ -1,4 +1,44 @@
 const app = document.getElementById("gameContainer");
+const loadIcon = document.getElementById("loadingIcon");
+validateUser();//Validamos antes si es un usuario valido
+fetchUserData();
+fetchUserGames();
+
+function fetchUserData(){
+	let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+		   let json = JSON.parse(this.responseText);
+		   console.log(json);
+		   let jsonM = JSON.parse(json.mensaje);
+		   console.log(jsonM.username);
+		   console.log(jsonM.email);
+		   console.log(jsonM.passwd);
+        }
+    }
+    xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
+    xmlhttp.send();
+}
+
+function fetchUserGames(){
+	let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			let json = JSON.parse(this.responseText);
+			console.log(json);
+			if(json.ok){
+				let jsonM = JSON.parse(json.mensaje);
+				jsonM.forEach(games => {
+					console.log(games.gameid);
+				});
+			}else{
+				console.log(json.mensaje);
+			}
+        }
+    }
+    xmlhttp.open("GET", "../scripts/userInformation.php?action=user_fav", true);
+    xmlhttp.send();
+}
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
@@ -64,30 +104,54 @@ function generateGame(image,name,date,developer,genre,description){
 
 	app.appendChild(gameInfo);
 	gameInfo.appendChild(gameImage);
+	gameImage.appendChild(gameTitle);
 	gameImage.appendChild(cover);
 	gameInfo.appendChild(gameText);
-	gameText.appendChild(gameTitle);
+	//gameText.appendChild(gameTitle);
 	gameText.appendChild(gameData);
 	gameText.appendChild(gameDescription);
 }
 
 window.onload= function(){
+	loadIcon.removeAttribute('hidden');//Hacemos visible el icono de carga
 	fetchGameList();
+	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
+	inactivityTime();
 }
+
+//Lazy loading
+document.addEventListener("DOMContentLoaded", function() {
+	var games = [].slice.call(document.querySelectorAll(".gameInfo"));
+  
+	if ("IntersectionObserver" in window) {
+	  let lazygameObserver = new IntersectionObserver(function(entries, observer) {
+		entries.forEach(function(entry) {
+		  if (entry.isIntersecting) {
+			entry.target.classList.add("visible");
+			lazygameObserver.unobserve(entry.target);
+		  }
+		});
+	  });
+  
+	  games.forEach(function(game) {
+		lazygameObserver.observe(game);
+	  });
+	}
+  });
 
 function userPaneSetup(){
 	document.getElementById("userImage").onclick= function(){
 		document.getElementById("blackBG").style.display = 'block';
-	document.getElementById("userPanel").style.display = 'block';
+		document.getElementById("userPanel").style.display = 'block';
 	}
 	document.getElementById("gameContainer").onclick= function(){
-	document.getElementById("blackBG").style.display = 'none';
-	document.getElementById("userPanel").style.display = 'none';
+		document.getElementById("blackBG").style.display = 'none';
+		document.getElementById("userPanel").style.display = 'none';
 	}
 	document.getElementById("searchBar").onclick= function(){
-	document.getElementById("userPanel").style.display = 'none';
-	document.getElementById("blackBG").style.display = 'none';
+		document.getElementById("userPanel").style.display = 'none';
+		document.getElementById("blackBG").style.display = 'none';
 	}
 	document.getElementById("userInfo").onmouseover= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#61616b';
@@ -96,3 +160,52 @@ function userPaneSetup(){
 		document.getElementById("userInfo").style.backgroundColor= '#3c3c42';
 	}
 }
+
+function validateUser(){
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+			try{
+				jsonresponse = JSON.parse(this.responseText);
+				if(!jsonresponse.ok){//Si no tiene acceso lo redirigimos al login
+					document.location = jsonresponse.mensaje;
+				}else{
+					//Podemos hacer que muestre un pop up con el mensaje
+					//de bienvenida que nosotros regresamos o cargamos la info del usuario aqui
+					console.log(jsonresponse.mensaje);
+				}
+			} catch{
+				console.log(this.responseText);
+			}
+        }
+	}
+	let url = new URLSearchParams(window.location.search);
+	let urlValue = "../scripts/validateUser.php";
+	if(url.has('id')){
+		urlValue +="?id="+ url.get('id');
+	}
+    xmlhttp.open("get", urlValue, true);
+    xmlhttp.send();
+}
+
+function logout() {
+	document.location = '../pages/login.html';
+	//Hacer la parte de cierre de session
+}
+
+//Inactividad del usuario
+var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+	document.onkeypress = resetTimer;
+	document.onclick = resetTimer;
+	window.addEventListener('scroll', resetTimer, true);
+
+    function resetTimer() {
+        clearTimeout(time);
+		time = setTimeout(logout, 60000);
+		//60,0000  = 1 minuto
+    }
+};

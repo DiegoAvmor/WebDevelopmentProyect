@@ -1,26 +1,30 @@
 <?php
 include "db.php";
+include "sanitizeValidate.php";
+
+//HTTP POST INFO
+$username = cleanVariable($_POST['username']);
+$passwd = cleanVariable($_POST['passwd']);
 //Response
 $ok = true;
 $mensaje = '';
 
-$conexion = connectMysqli();
-if (!$conexion) {
-    die("Fallo: " . mysqli_connect_error());
-}
-
 //Sentencia SQL
-$sql = "SELECT username, passwd FROM usuarios WHERE username = '{$_POST['username']}' AND passwd = '{$_POST['passwd']}' ";
-
-$resultado = mysqli_query($conexion, $sql);
-mysqli_close($conexion);
-
-if (mysqli_num_rows($resultado) > 0) {
-	$mensaje = '../pages/signUp.html';
+$sql = "SELECT username FROM usuarios WHERE username = '{$username}' AND passwd = '{$passwd}' ";
+$resultado = ConsultaSQL($sql);
+if(session_status() == PHP_SESSION_ACTIVE ){
+	session_destroy();
+}else{
+	session_start();
+}
+if(count($resultado)>0){
+	$_SESSION["status"] = true;
+	$_SESSION["user"] = $username;
+	$mensaje = '../pages/catalogue.html?id='.$username;
 } else {
+	$_SESSION["status"] = false;
 	$ok = false;
 	$mensaje = 'Usuario o Contraseña incorrecta';
-	//header("location: ../pages/login.html");
 }
 
 //Respuesta en formato json
@@ -31,6 +35,4 @@ echo json_encode(
 	)
 );
 
-//echo date("jS F, Y", strtotime("11-12-10"));
-// outputs 11th December, 2010 
 ?>
