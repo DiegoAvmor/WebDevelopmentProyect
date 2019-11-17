@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2019 a las 18:00:29
--- Versión del servidor: 10.3.16-MariaDB
--- Versión de PHP: 7.3.8
+-- Tiempo de generación: 16-11-2019 a las 19:48:30
+-- Versión del servidor: 10.4.8-MariaDB
+-- Versión de PHP: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `reviews` (
   `username` varchar(30) NOT NULL,
-  `fecha` date NOT NULL,
   `gameid` int(11) NOT NULL,
+  `fecha` date NOT NULL,
   `descripcion` text NOT NULL,
   `calificacion` float NOT NULL,
   `calificacionTop` int(11) NOT NULL
@@ -48,6 +48,14 @@ CREATE TABLE `usergames` (
   `gameid` int(11) NOT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usergames`
+--
+
+INSERT INTO `usergames` (`username`, `gameid`, `fecha`) VALUES
+('DiegoAvmor', 111, '2019-11-12'),
+('DiegoAvmor', 123, '2019-11-12');
 
 -- --------------------------------------------------------
 
@@ -80,7 +88,7 @@ INSERT INTO `usuarios` (`username`, `email`, `passwd`) VALUES
 -- Indices de la tabla `reviews`
 --
 ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`username`,`fecha`,`gameid`) USING BTREE;
+  ADD PRIMARY KEY (`username`,`gameid`) USING BTREE;
 
 --
 -- Indices de la tabla `usergames`
