@@ -1,44 +1,63 @@
 //This file just emulates the functionality of adding a review into de db
 const containerMessage = document.getElementById("root");
+//Estas son variables que se obtienen ya de la interaccion con la gui
+var gameid = "12345"; //Provisional
+var titleInput = title.value;
+var reviewArea = review.value;
 
-reviewForm.onsubmit = function(){
-    var username = "ElJohan"; //Provisional, el real con cookies o ls o como prefieran
-    var date = new Date(); //date.getTime();
-    var currentDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-    var gameid = "123"; //Provisional
-    var titleInput = title.value;
-    var reviewArea = review.value;
-
-    
-    //Primero verificamos que no hayan campos vacios
-
-    if (isEmpty(titleInput)) {
-        title.focus();
-        return false;
-    }
-
-    if (isEmpty(reviewArea)) {
-        review.focus();
-        return false;
-    }    
-    answer.value = titleInput + "\n" + reviewArea;
-    
-    event.preventDefault();//Evita que se haga el envio del formulario
-    var stringBuilder = "username="+username+"&"+ "date="+currentDate+"&"+"gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value;
+reviewForm.agregar.onclick = function(){
+    var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=0";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            alert(this.responseText);
             handleResponse(this.responseText);
+            answer.value = this.responseText;
         }
     }
-    xmlhttp.open("post", "../scripts/reviews.php", true);
+    xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review&option=0", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(stringBuilder);
 }
 
-function isEmpty(String) {
-    return String == "";
+reviewForm.delete.onclick = function(){
+    var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=1";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            handleResponse(this.responseText);
+            answer.value = this.responseText;
+        }
+    }
+    xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(stringBuilder);
+}
+
+reviewForm.update.onclick = function(){
+    var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=2";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            handleResponse(this.responseText);
+            answer.value = this.responseText;
+        }
+    }
+    xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(stringBuilder);
+}
+
+reviewForm.obtener.onclick = function(){
+    var stringBuilder = "gameid="+gameid;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            answer.value = this.responseText;
+            handleResponse(this.responseText);
+        }
+    }
+    xmlhttp.open("GET", "../scripts/userInformation.php?action=game_review&" + stringBuilder, true);
+    xmlhttp.send();
 }
 
 //Funcion que manejara las acciones correspondientes a la respuesta del servidor
@@ -47,9 +66,10 @@ function handleResponse(response){
     try{
         parsedResponse = JSON.parse(response);
         if(parsedResponse.ok){
-            generatePopUpMessage(parsedResponse.message);
+            console.log(parsedResponse.mensaje);
+            generatePopUpMessage(parsedResponse.mensaje);
         }else{
-            generatePopUpMessage(parsedResponse.message);
+            generatePopUpMessage(parsedResponse.mensaje);
         }
     } catch{
         console.log("No se pudo convertir a objeto");
