@@ -20,10 +20,9 @@ function fetchUserData(){
         if (this.readyState == 4 && this.status == 200) {
 		   let json = JSON.parse(this.responseText);
 		   console.log(json);
-		   let jsonM = JSON.parse(json.mensaje);
-		   console.log(jsonM.username);
-		   console.log(jsonM.email);
-		   console.log(jsonM.passwd);
+		   console.log(json.mensaje.username);
+		   console.log(json.mensaje.email);
+		   console.log(json.mensaje.passwd);
         }
     }
     xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
@@ -37,8 +36,7 @@ function fetchUserGames(){
 			let json = JSON.parse(this.responseText);
 			console.log(json);
 			if(json.ok){
-				let jsonM = JSON.parse(json.mensaje);
-				jsonM.forEach(games => {
+				json.mensaje.forEach(games => {
 					console.log(games.gameid);
 				});
 			}else{

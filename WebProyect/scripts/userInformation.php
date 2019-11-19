@@ -55,7 +55,7 @@ function manageUser(){
         $resultado = ConsultaSQL($sql);
         if(count($resultado) == 1){//Se encontro asi que le mandamos la informacion
             $jsonMessage = convertOneValueArray($resultado);
-            $GLOBALS['mensaje'] = json_encode($jsonMessage);
+            $GLOBALS['mensaje'] = ($jsonMessage);
         
         }else{//Esto no se debe de hacer porque ya tenemos una session con el usuario
             $GLOBALS['ok'] = false;
