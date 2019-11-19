@@ -130,7 +130,7 @@ window.onload= function(){
 	reviewPage.onclick = function(){
 		openReviewWindow();
 	}
-	//inactivityTime();
+	inactivityTime();//No lo borren
 }
 
 //Lazy loading
