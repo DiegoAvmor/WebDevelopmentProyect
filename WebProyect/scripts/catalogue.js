@@ -3,6 +3,16 @@ const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
 fetchUserGames();
+function openReviewWindow(){
+	//hice esto para no crear un formulario cualquiera dentro del html de catalogo
+	let url = new URLSearchParams(window.location.search);
+	let urlValue = "../pages/reviewSample.html";
+	if(url.has('id')){
+		urlValue +="?id="+ url.get('id');
+	}
+    alert(urlValue);
+	window.location = urlValue;
+}
 
 function fetchUserData(){
 	let xmlhttp = new XMLHttpRequest();
@@ -117,7 +127,10 @@ window.onload= function(){
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
-	inactivityTime();
+	reviewPage.onclick = function(){
+		openReviewWindow();
+	}
+	//inactivityTime();
 }
 
 //Lazy loading
