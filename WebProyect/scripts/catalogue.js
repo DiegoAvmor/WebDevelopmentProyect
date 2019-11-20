@@ -175,10 +175,12 @@ function userPaneSetup(){
 	document.getElementById("gameContainer").onclick= function(){
 		document.getElementById("blackBG").style.display = 'none';
 		document.getElementById("userPanel").style.display = 'none';
+		document.getElementById("userEdit").style.display = 'none';
 	}
 	document.getElementById("searchBar").onclick= function(){
 		document.getElementById("userPanel").style.display = 'none';
 		document.getElementById("blackBG").style.display = 'none';
+		document.getElementById("userEdit").style.display = 'none';
 
 	}
 	document.getElementById("userInfo").onmouseover= function(){
