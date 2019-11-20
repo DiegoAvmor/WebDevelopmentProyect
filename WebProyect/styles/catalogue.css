@@ -8,16 +8,48 @@
 			height: 100vh;
 			overflow: hidden;
 		}
+		/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #61616b; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9e9d9d; 
+}
+
 		#blackBG{
 			pointer-events: none;
 			height: 100%;
-			width: 75%;
+			width: 100%;
 			position: fixed;
 			background-color: black;
 			opacity: .5;
 			z-index: 2;
 			display: none;
 		}
+		#blackBG2{
+			pointer-events: none;
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			background-color: black;
+			opacity: .5;
+			z-index: 2;
+			display: none;
+		}
+
 		#navTitle{
 			font-family: var(--font);
     		color: var(--textColor);
@@ -60,10 +92,24 @@
 		#userImagePane{
 			background-color: #61616b;
 		}
+		#customize button{
+			border-style: none;
+			color: var(--textColor);
+			font-weight: bold;
+			font-size: 15px;
+			background-color: #3c3c42;
+			border-radius: 15px;
+			width: 90px;
+			height:40px;
+			margin-left: 16%;
+
+		}
 
 		#searchBar{
 			margin: auto;
+			margin-top: 1.9%;
 		}
+
 
 		#searchBar > i{
 			position: absolute;
@@ -75,13 +121,25 @@
 
 		#searchB:focus {outline:none;}
 
-		#searchBar > input{
+		#searchBar > input:not(#searchButt) {
 			margin: auto;
 			border-radius: 15px;
 			width: 230px;
 			height: 20px;
 			background-color: white;
 			padding-left: 30px;
+		}
+		#searchButt{
+			border-style: solid;
+			border-color: white;
+			margin-top: 1px;
+			border-radius: 15px;
+			background-color: white;
+			width: 60px;
+		}
+		#searchButt:hover {
+			border-color: lightgray;
+			background-color: lightgray;
 		}
 		#userInfo{
 			float: right;
@@ -108,7 +166,8 @@
 			margin-right: 0%;
 			margin-top: 26PX;
 			height: 94.5%;
-
+			display: grid;
+			grid-template-columns: 50% 50%;
 			overflow-y: auto;
 			background-color: #508AA8;
 		}
@@ -118,10 +177,16 @@
 			box-shadow:inset 0px 0px 0px 10px;
 			margin-top: 20px;
 			margin-left: 40px;
-			width: 45%;
+			margin-right: 10px;
+			width: 375px;
 			height: 280px;
 			float: left;
+			-webkit- transition: width 2s;
+			transition: width 2s;
 
+		}
+		.gameInfo:hover {
+			width:90%;
 		}
 		.gameImage img{
 			height: 250px;
@@ -136,14 +201,28 @@
 			top: 15px;
 		}
 		.gameText{
+			opacity: 0;
+			
 			position: relative;
 			top: 25px;
 			font-family: var(--font);
     		color: var(--textColor);
 			left: 50px;
 			width: 90%;
+			height: 100%;
+			
+			
+		}
+		.gameText:hover {
+			transition: opacity 2s;
+			transition-delay: 2s;
+			opacity:1;
 
 		}
+		.gameText:not( :hover ){
+			opacity:0;
+		}
+
 		.gameTitle{
 			font-family: var(--font);
     		color: var(--textColor);
@@ -155,10 +234,76 @@
 			background-color: 	rgb(0, 0, 0,.8);/*fondo con opacidad*/
 		}
 		.gameDescription{
-			overflow: hidden;
+			overflow-y: auto;
 			position: relative;
 			height: 130px;
 			max-height: 130px;
+		}
+		.commentButt{
+			
+			position: absolute;
+			right: 3%;
+			bottom: 14%;
+			background-color: 
+
+		}
+		.commentB{
+			color: var(--textColor);
+			background-color:  #3c3c42;
+			border-style: none;
+			border-radius: 15px;
+		}
+
+		#commentDisplay{
+			overflow-y:auto;
+			display: none;
+			position: fixed;
+			top: 5%;
+			left: 10%;
+			height: 92%;
+			width: 78%;
+			background-color: #bfcedf;
+			z-index: 4;
+		}
+		#gameInfoComm img{
+			width: 350px;
+			height: auto;
+		}
+
+		#userEdit{
+			overflow-y:auto;
+			display: none;
+			position: fixed;
+			top: 5%;
+			left: 10%;
+			height: 92%;
+			width: 78%;
+			background-color: #61616b;
+			z-index: 4;
+		}
+		#userImagePaneEd{
+			margin-left: 500px;
+		}
+		#userTextEd{
+			margin-top: 10px;
+			margin-left: 530px;
+		}
+		#userImagePaneEd img{
+			height: 220px;
+			width: auto;
+			border-radius: 50%;
+		}
+		#controlButts button{
+			border-style: none;
+			color: var(--textColor);
+			font-weight: bold;
+			font-size: 15px;
+			background-color: #3c3c42;
+			border-radius: 15px;
+			width: 90px;
+			height:40px;
+			margin-top: 10px;
+			margin-left: 345px;
 		}
 
 		#loadingIcon:not([hidden]) {
@@ -173,7 +318,17 @@
 			align-items: center;
 			animation: spin 1s infinite linear
 		  }
-		  
+		  #commExitB{
+		  	background-color: transparent;
+		  }
+		  #commExitButt{
+		  	font-weight: bold;
+		  	color: #fd665e;
+		  	font-size: 150%;
+		  	border-style: none;
+		  	background-color: transparent;
+
+		  }
 		  
 		  @keyframes spin {
 			from {

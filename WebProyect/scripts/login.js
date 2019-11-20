@@ -7,6 +7,7 @@ const checkbtn = document.getElementById("rememberbox");
 loadInput();
 
 
+
 //En el evento de submit hacemos una peticion POST para validar al usuario
 loginForm.onsubmit = function(){
     event.preventDefault();//Evita que se haga el envio del formulario
@@ -58,8 +59,6 @@ function loadInput(){
         checkbtn.checked = true;
     }
 }
-
-
 
 function generatePopUpMessage(message){
     let messageDiv = document.createElement('div');
