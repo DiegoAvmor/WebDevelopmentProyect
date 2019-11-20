@@ -3,17 +3,18 @@ const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
 fetchUserGames();
+
 //TODO: Create Objects "games"
+
 function fetchUserData(){
 	let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 		   let json = JSON.parse(this.responseText);
 		   console.log(json);
-		   let jsonM = JSON.parse(json.mensaje);
-		   console.log(jsonM.username);
-		   console.log(jsonM.email);
-		   console.log(jsonM.passwd);
+		   console.log(json.mensaje.username);
+		   console.log(json.mensaje.email);
+		   console.log(json.mensaje.passwd);
         }
     }
     xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
@@ -27,8 +28,7 @@ function fetchUserGames(){
 			let json = JSON.parse(this.responseText);
 			console.log(json);
 			if(json.ok){
-				let jsonM = JSON.parse(json.mensaje);
-				jsonM.forEach(games => {
+				json.mensaje.forEach(games => {
 					console.log(games.gameid);
 				});
 			}else{
@@ -125,6 +125,7 @@ window.onload= function(){
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
+
 	//inactivityTime();
 
 }
