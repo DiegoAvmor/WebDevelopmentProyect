@@ -5,7 +5,6 @@ const checkbtn = document.getElementById("rememberbox");
 
 //Cargamos la informacion en los campos si este tiene
 loadInput();
-buttHandler();
 
 
 
@@ -58,12 +57,6 @@ function loadInput(){
         username.value = localStorage.getItem("userN");
         password.value = localStorage.getItem("userP");
         checkbtn.checked = true;
-    }
-}
-
-function buttHandler(){
-    document.getElementById("videogame").onclick= function(){
-        document.location.href = "catalogue.html";
     }
 }
 
