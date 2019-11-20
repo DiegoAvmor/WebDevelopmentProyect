@@ -3,7 +3,7 @@ const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
 fetchUserGames();
-
+//TODO: Create Objects "games"
 function fetchUserData(){
 	let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -98,10 +98,17 @@ function generateGame(image,name,date,developer,genre,description){
 	gameData.setAttribute('class','gameData');
 	gameData.innerHTML = ("Released: " + date + "<br> Developer: " + developer
 	+ "<br> Genre: " + genre);
+	
+	const commBut= document.createElement('div');
+	commBut.setAttribute('class','commentButt');
+	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp()'>Comments(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
+
 	const gameDescription = document.createElement('div');
 	gameDescription.setAttribute('class','gameDescription');
 	gameDescription.innerHTML = (description);
 
+
+	//const gameFav
 	app.appendChild(gameInfo);
 	gameInfo.appendChild(gameImage);
 	gameImage.appendChild(gameTitle);
@@ -110,6 +117,7 @@ function generateGame(image,name,date,developer,genre,description){
 	//gameText.appendChild(gameTitle);
 	gameText.appendChild(gameData);
 	gameText.appendChild(gameDescription);
+	gameText.appendChild(commBut);
 }
 
 window.onload= function(){
@@ -117,8 +125,26 @@ window.onload= function(){
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
-	inactivityTime();
+	//inactivityTime();
+
 }
+	//test function
+	function imageChange(){
+		var newimg="";
+		var imgs = ["../images/test/splatTim1.jpg", "../images/test/splatTim2.jpg", "../images/test/splatTim3.jpg","../images/test/splatTim4.jpg"];
+		for (var i = 0; i < imgs.length; i++) {
+			console.log(document.getElementById("commentGameInfoImage").getAttribute('src'));
+			if((document.getElementById("commentGameInfoImage").getAttribute('src'))==imgs[i]){
+				if(i!=imgs.length-1){
+					newimg=imgs[i+1];
+				}else{
+					newimg=imgs[0];
+				}
+			}
+		}
+
+		document.getElementById("commentGameInfoImage").src=newimg;
+	}
 
 //Lazy loading
 document.addEventListener("DOMContentLoaded", function() {
@@ -152,6 +178,7 @@ function userPaneSetup(){
 	document.getElementById("searchBar").onclick= function(){
 		document.getElementById("userPanel").style.display = 'none';
 		document.getElementById("blackBG").style.display = 'none';
+
 	}
 	document.getElementById("userInfo").onmouseover= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#61616b';
@@ -159,8 +186,40 @@ function userPaneSetup(){
 	document.getElementById("userInfo").onmouseout= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#3c3c42';
 	}
-}
+	document.getElementById("exitButt").onclick= function(){
+		//----------------Poner termino de sesión aquí-------------------!
+		document.location.href = "login.html";
+	}
+	document.getElementById("searchButt").onclick= function(){
+		reLoadGames(document.getElementById("searchB").value);
+	}
+	document.getElementById("editButt").onclick=function(){
+		document.getElementById("userPanel").style.display='none';
+		document.getElementById("userEdit").style.display="block";
+		document.getElementById("blackBG").style.display = 'block';
 
+	}
+	document.getElementById("editExitButt").onclick=function(){
+
+		document.getElementById("userEdit").style.display="none";
+		document.getElementById("blackBG").style.display = 'none';
+		return getData();
+	}
+
+}
+	function reLoadGames(searchTerm){
+		//Recargar gameContainer con los juegos que encuentre
+	}
+
+
+function showCommentDisp(){
+	document.getElementById("blackBG2").style.display="block";
+	document.getElementById("commentDisplay").style.display="block";
+}
+function exitCommentDisp(){
+		document.getElementById("blackBG2").style.display="none";
+	document.getElementById("commentDisplay").style.display="none";
+}
 function validateUser(){
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -187,6 +246,7 @@ function validateUser(){
     xmlhttp.open("get", urlValue, true);
     xmlhttp.send();
 }
+
 
 function logout() {
 	document.location = '../pages/login.html';

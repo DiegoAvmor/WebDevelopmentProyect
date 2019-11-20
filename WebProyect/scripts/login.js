@@ -5,6 +5,8 @@ const checkbtn = document.getElementById("rememberbox");
 
 //Cargamos la informacion en los campos si este tiene
 loadInput();
+buttHandler();
+
 
 
 //En el evento de submit hacemos una peticion POST para validar al usuario
@@ -59,7 +61,11 @@ function loadInput(){
     }
 }
 
-
+function buttHandler(){
+    document.getElementById("videogame").onclick= function(){
+        document.location.href = "catalogue.html";
+    }
+}
 
 function generatePopUpMessage(message){
     let messageDiv = document.createElement('div');
