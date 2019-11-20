@@ -3,6 +3,16 @@ const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
 fetchUserGames();
+function openReviewWindow(){
+	//hice esto para no crear un formulario cualquiera dentro del html de catalogo
+	let url = new URLSearchParams(window.location.search);
+	let urlValue = "../pages/reviewSample.html";
+	if(url.has('id')){
+		urlValue +="?id="+ url.get('id');
+	}
+    alert(urlValue);
+	window.location = urlValue;
+}
 
 function fetchUserData(){
 	let xmlhttp = new XMLHttpRequest();
@@ -10,10 +20,9 @@ function fetchUserData(){
         if (this.readyState == 4 && this.status == 200) {
 		   let json = JSON.parse(this.responseText);
 		   console.log(json);
-		   let jsonM = JSON.parse(json.mensaje);
-		   console.log(jsonM.username);
-		   console.log(jsonM.email);
-		   console.log(jsonM.passwd);
+		   console.log(json.mensaje.username);
+		   console.log(json.mensaje.email);
+		   console.log(json.mensaje.passwd);
         }
     }
     xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
@@ -27,8 +36,7 @@ function fetchUserGames(){
 			let json = JSON.parse(this.responseText);
 			console.log(json);
 			if(json.ok){
-				let jsonM = JSON.parse(json.mensaje);
-				jsonM.forEach(games => {
+				json.mensaje.forEach(games => {
 					console.log(games.gameid);
 				});
 			}else{
@@ -117,7 +125,10 @@ window.onload= function(){
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
 	userPaneSetup();
-	inactivityTime();
+	reviewPage.onclick = function(){
+		openReviewWindow();
+	}
+	inactivityTime();//No lo borren
 }
 
 //Lazy loading
