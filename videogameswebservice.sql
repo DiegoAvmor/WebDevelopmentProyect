@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 19:48:30
+-- Tiempo de generación: 21-11-2019 a las 20:08:23
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -54,8 +54,8 @@ CREATE TABLE `usergames` (
 --
 
 INSERT INTO `usergames` (`username`, `gameid`, `fecha`) VALUES
-('DiegoAvmor', 111, '2019-11-12'),
-('DiegoAvmor', 123, '2019-11-12');
+('DiegoAvmor', 111, '2019-11-11'),
+('DiegoAvmor', 123, '2019-11-11');
 
 -- --------------------------------------------------------
 
@@ -74,11 +74,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`username`, `email`, `passwd`) VALUES
-('Carlos', 'correo@mail.com', '123123123'),
-('CarlosNuevo', 'carlos@gmail.com', '123456789'),
-('CorreoJohanes', 'nuevo@gmail.com', '1234567890'),
-('DiegoAvmor', 'correo@gmail.com', '123123'),
-('Johan', 'correoalgobonito@hotmail.com', '123456789');
+('DiegoAvmor', 'correoChafa', '123123'),
+('Johan', 'correoalgobonito@hotmail.com', '123456789'),
+('NewUser', 'user@gmail.com.mx', '123456789');
 
 --
 -- Índices para tablas volcadas
@@ -88,19 +86,37 @@ INSERT INTO `usuarios` (`username`, `email`, `passwd`) VALUES
 -- Indices de la tabla `reviews`
 --
 ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`username`,`gameid`) USING BTREE;
+  ADD PRIMARY KEY (`username`,`gameid`) USING BTREE,
+  ADD KEY `username` (`username`);
 
 --
 -- Indices de la tabla `usergames`
 --
 ALTER TABLE `usergames`
-  ADD PRIMARY KEY (`username`,`gameid`);
+  ADD PRIMARY KEY (`username`,`gameid`),
+  ADD KEY `username` (`username`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`username`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `user_Review` FOREIGN KEY (`username`) REFERENCES `usuarios` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usergames`
+--
+ALTER TABLE `usergames`
+  ADD CONSTRAINT `usergames_ibfk_1` FOREIGN KEY (`username`) REFERENCES `usuarios` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
