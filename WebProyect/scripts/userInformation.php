@@ -65,11 +65,28 @@ function manageUser(){
     }
     //Desea actualizar la info del usuario
     if($_SERVER['REQUEST_METHOD'] === 'PUT'){
-
+        parse_str(file_get_contents('php://input'), $_PUT);
+        $editUser = $_PUT['username'];
+        $editMail = $_PUT['mail'];
+        $sql = "SELECT username FROM usuarios WHERE username = '{$editUser}'";
+        $resultado = ConsultaSQL($sql);
+        if(count($resultado)==1){//Si se encontro, entonces ya existe ese usuario asi que no puedes cambiar tu nombre de usuario por ese
+            $GLOBALS['ok'] = false;
+            $GLOBALS['mensaje'] = "El nombre de usuario que desea cambiar ya existe, se actualizo la otra informacion";
+            $sql = "UPDATE usuarios SET  email = '{$editMail}' WHERE username = '{$username}'";
+            EjecutarSQL($sql);
+        }else{//No se encontro el mismo usuario asi que podemos cambiar la informacion completa
+            $sql = "UPDATE usuarios SET username = '{$editUser}', email = '{$editMail}' WHERE username = '{$username}'";
+            EjecutarSQL($sql);
+            $_SESSION['user'] = $editUser;//Cambiamos usuario de la session por el cambiado
+            $GLOBALS['mensaje'] = "Se cambio la informacion del Usuario";
+        }
     }
     //Desea eliminar al usuario
     if($_SERVER['REQUEST_METHOD'] === 'DELETE'){
         //Eliminamos en la BD todo lo relacionado al usuario, juegos y reviews
+        $sql = "DELETE FROM usuarios WHERE username = '{$username}'";
+        EjecutarSQL($sql);
         //Destruimos la session actual y lo mandamos al Login
         session_destroy();
     }
