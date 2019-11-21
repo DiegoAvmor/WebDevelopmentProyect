@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="../scripts/reviews.js?id" defer></script>
+    <script src="../scripts/manageUser.js?id" defer></script>
 </head>
 <body>
     <!--Este archivo debe ser eliminado-->
@@ -26,6 +27,28 @@
             <input type="button" id="agregar" name="agregar" value="agregar">
             <input type="button" id="update" name="update" value="actualizar">
             <input type="button" id="delete" name="delete" value="eliminar">
+        </form>
+        <form name="userForm">
+            <div id="userTextEd">
+				<b>UserName:</b>
+				<div id="userNameEd">
+					<input type="text" name="userName" placeholder="Guest">	
+                </div>
+                
+				<b>Name:</b>
+				<div id="nameEd">
+					<input type="text" name="Name" placeholder= "Guest User">
+				</div>
+
+				<b>E-Mail Address:</b>
+				<div id="emailAddressEd">
+					<input type="text" name="mail" placeholder="dumbo@gmail.com">
+                </div>
+			</div>
+			<div id="controlButts">
+				<button id="editUpdateButt" name="updateBtn">Update</button>
+				<button id="editExitButt" name="deleteBtn">Delete</button>
+			</div>
         </form>
     </div>
     <br>
