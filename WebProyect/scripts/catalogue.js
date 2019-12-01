@@ -42,7 +42,7 @@ function fetchUserGames(){
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
-	fetch("https://rawg-video-games-database.p.rapidapi.com/games?dates=2019-10-01,2019-10-30", {
+	fetch("https://rawg-video-games-database.p.rapidapi.com/games?page=1", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
@@ -98,7 +98,7 @@ function generateGame(image,name,date,developer,genre,description){
 	gameData.setAttribute('class','gameData');
 	gameData.innerHTML = ("Released: " + date + "<br> Developer: " + developer
 	+ "<br> Genre: " + genre);
-	
+
 	const commBut= document.createElement('div');
 	commBut.setAttribute('class','commentButt');
 	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp()'>Comments(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
@@ -150,7 +150,7 @@ window.onload= function(){
 //Lazy loading
 document.addEventListener("DOMContentLoaded", function() {
 	var games = [].slice.call(document.querySelectorAll(".gameInfo"));
-  
+
 	if ("IntersectionObserver" in window) {
 	  let lazygameObserver = new IntersectionObserver(function(entries, observer) {
 		entries.forEach(function(entry) {
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  }
 		});
 	  });
-  
+
 	  games.forEach(function(game) {
 		lazygameObserver.observe(game);
 	  });
@@ -211,7 +211,25 @@ function userPaneSetup(){
 
 }
 	function reLoadGames(searchTerm){
-		//Recargar gameContainer con los juegos que encuentre
+		document.getElementById("gameContainer").innerHTML = "";
+		fetch(("https://rawg-video-games-database.p.rapidapi.com/games?search=" + searchTerm), {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+			"x-rapidapi-key": "ba56e18dfbmsha0533de8919d27bp10d3dcjsn5229ce979bb3"
+		}
+		})
+		.then((resp) => resp.json())
+		.then(function (response) {
+				var jsonGameList = response;
+				//Envia el ID de cada uno de los juegos en la primera página
+				for(var i = 0; i < 19; i++){
+					fetchGameInfo(jsonGameList.results[i].id);
+				}
+		})
+		.catch(function (err) {
+				console.log("No se puedo obtener el recurso", err);
+		});
 	}
 
 
