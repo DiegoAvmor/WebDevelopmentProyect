@@ -40,6 +40,15 @@ function fetchUserGames(){
     xmlhttp.send();
 }
 
+function updateInfo(){
+	document.getElementById("userName").innerHTML = document.getElementById("uname").innerHTML;
+	document.getElementById("name").innerHTML = document.getElementById("fname").innerHTML;
+	document.getElementById("emailAddress").innerHTML = document.getElementById("email").innerHTML;
+	document.getElementById("userCount").innerHTML = document.getElementById("country").innerHTML;
+	document.getElementById("userCity").innerHTML = document.getElementById("city").innerHTML;
+	document.getElementById("userBirthday").innerHTML = document.getElementById("bday").innerHTML;
+}
+
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
 	fetch("https://rawg-video-games-database.p.rapidapi.com/games?page=1", {

@@ -15,18 +15,18 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #61616b; 
+  background: #61616b;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #9e9d9d; 
+  background: #9e9d9d;
 }
 
 		#blackBG{
@@ -69,6 +69,7 @@
 			height:100%;
 			background-color: #61616b;
 			z-index: 3;
+			overflow-y: auto;
 		}
 		#userName{
 			margin-top: 0px;
@@ -202,7 +203,7 @@
 		}
 		.gameText{
 			opacity: 0;
-			
+
 			position: relative;
 			top: 25px;
 			font-family: var(--font);
@@ -210,8 +211,8 @@
 			left: 50px;
 			width: 90%;
 			height: 100%;
-			
-			
+
+
 		}
 		.gameText:hover {
 			transition: opacity 2s;
@@ -240,11 +241,11 @@
 			max-height: 130px;
 		}
 		.commentButt{
-			
+
 			position: absolute;
 			right: 3%;
 			bottom: 14%;
-			background-color: 
+			background-color:
 
 		}
 		.commentB{
@@ -329,7 +330,7 @@
 		  	background-color: transparent;
 
 		  }
-		  
+
 		  @keyframes spin {
 			from {
 			  transform: rotate(0deg);
