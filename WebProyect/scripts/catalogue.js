@@ -274,7 +274,7 @@ function validateUser(){
 			} catch{
 				console.log(this.responseText);
 			}
-        }
+    }
 	}
 	let url = new URLSearchParams(window.location.search);
 	let urlValue = "../scripts/validateUser.php";
