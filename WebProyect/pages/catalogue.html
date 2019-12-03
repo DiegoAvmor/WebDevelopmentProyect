@@ -4,6 +4,7 @@
 	<title>Catalogue</title>
 	<link rel="stylesheet" type="text/css" href="../styles/catalogue.css">
 	<script type="text/javascript" src="../scripts/catalogue.js?id" defer></script>
+	<script type="text/javascript" src="../scripts/reviews.js?id" defer></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -13,13 +14,13 @@
 		<div id="navTitle">
 			VIDEOGAMES
 		</div>
-		
+
 			<div id="searchBar">
 				<i class="material-icons">search</i>
 				<input type="text" name="search" id="searchB" placeholder="Search Videogames">
 				<input type="submit" name="searchButt" id="searchButt" value="Search">
 			</div>
-		
+
 		<div id="userInfo">
 			<div id="userImage">
 				<img src="../images/main/testUserIcon.png">
@@ -37,23 +38,23 @@
 					Guest
 				</div>
 
-					<b>Name:</b>
+					<!-- <b>Name:</b>
 
 				<div id="name">
 					<p>Guest User</p>
-				</div>
+				</div> -->
 
 				<b>E-Mail Address:</b>
 
 				<div id="emailAddress"><p>dumbo@gmail.com</p></div>
-				<b>Country:</b>
+				<!-- <b>Country:</b>
 				<div id="userCount"> <p>Mexico <p></div>
 				<b>City:</b>
 				<div id="userCity"> <p>Merida</p></div>
 				<b>Birthday</b>
 				<div id="userBirthday"> <p>27/02</p></div>
 				<b>Joined Since:</b>
-				<div id="userJoinDate"> <p>28/10/2019</p></div>
+				<div id="userJoinDate"> <p>28/10/2019</p></div> -->
 
 				<div id="customize"><button id="editButt">Edit</button><button id="exitButt">LogOut</button></div>
 
@@ -64,20 +65,23 @@
 	</div>
 	&nbsp;
 	<div id="gameContainer">
-		
+
 	</div>
 
 	<div id="commentDisplay">
 		<div id="commExitB">
-			<button id="commExitButt" onclick="exitCommentDisp()">X</button>
+			<button id='commExitButt' onclick='exitCommentDisp()'>X</button>
+		</div>
+		<div id="reviewButLoc">
+
 		</div>
 		<div id="gameInfoComm">
 			<div id="gameImgCOmm">
-				<img id="commentGameInfoImage" src="../images/test/splatTim1.jpg"> 
+				<img id="commentGameInfoImage" src="../images/test/splatTim1.jpg">
 				<button id="imageChangeButt" onclick="imageChange()">test</button>
 			</div>
 		</div>
-		&nbsp; 
+		&nbsp;
 	</div>
 	<div id="userEdit">
 		<form>
@@ -87,50 +91,58 @@
 				<img src="../images/main/testUserIcon.png"> <br>
 				<input type="file" name="fileUp" value="upload">
 			</div>
-			<div id="userTextEd">
+			<form name="userForm">
+						<div id="userTextEd">
 				<b>UserName:</b>
 				<div id="userNameEd">
 					<input type="text" name="userName" placeholder="Guest">
-					
-				</div>
+								</div>
 
-					<b>Name:</b>
-
+				<b>Name:</b>
 				<div id="nameEd">
 					<input type="text" name="Name" placeholder= "Guest User">
-					
 				</div>
 
 				<b>E-Mail Address:</b>
-
 				<div id="emailAddressEd">
-					<input type="text" name="userName" placeholder="dumbo@gmail.com">
-				</div>
-				<b>Country:</b>
-				<div id="userCountEd">
-					<input type="text" name="userName" placeholder="Mexico">
-				</div>
-				<b>City:</b>
-				<div id="userCityEd"> 
-					<input type="text" name="userName" placeholder="Merida">
-				</div>
-				<b>Birthday</b>
-				<div id="userBirthdayEd">
-					<input type="text" name="userName" placeholder ="i forgot lmao">
-				</div>
-				
-
+					<input type="text" name="mail" placeholder="dumbo@gmail.com">
+								</div>
 			</div>
 			<div id="controlButts">
-
-				<button id="editUpdateButt">Update</button>
-
-
-
-				<button id="editExitButt" type="button">Cancel</button>
+				<button id="editUpdateButt" name="updateBtn">Update</button>
+				<button id="editExitButt" name="deleteBtn">Delete</button>
+			</div>
+		</form>
 			</div>
 		</form>
 	</div>
+
+	<div id="reviewEditor">
+		<button id="reviewExitButt" onclick="exitReviewDisp()">X</button>
+		<br>
+		<div id="reviewHeader">
+			Write your review!
+		</div>
+		<form name="reviewForm">
+			<!-- Title -->
+				<input type="hidden" id="id" name="id">
+				<input type="hidden" name="title" id="title" value="placeholder"><br>
+				<textarea name="review" id="review" cols="30" rows="10"></textarea><br>
+				<select name="rating" id="rating" required>
+						<option value="">None</option>
+						<option value="1">Skip</option>
+						<option value="2">Bad</option>
+						<option value="3">Meh</option>
+						<option value="4">Recommended</option>
+						<option value="5">Exceptional</option5>
+				</select>
+				<!-- <input type="button" id="obtener" name="obtener" value="obtener"> -->
+				<input type="button" id="agregar" name="agregar" value="Publish">
+				<!-- <input type="button" id="update" name="update" value="actualizar">
+				<input type="button" id="delete" name="delete" value="eliminar"> -->
+		</form>
+	</div>
+
 	<div id="loadingIcon" hidden>(ㆆ _ ㆆ)</div>
 </body>
 </html>

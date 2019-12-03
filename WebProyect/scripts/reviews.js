@@ -6,6 +6,7 @@ var titleInput = title.value;
 var reviewArea = review.value;
 
 reviewForm.agregar.onclick = function(){
+    gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=0";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -20,6 +21,7 @@ reviewForm.agregar.onclick = function(){
 }
 
 reviewForm.delete.onclick = function(){
+    gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=1";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -34,6 +36,7 @@ reviewForm.delete.onclick = function(){
 }
 
 reviewForm.update.onclick = function(){
+    gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=2";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -48,6 +51,7 @@ reviewForm.update.onclick = function(){
 }
 
 reviewForm.obtener.onclick = function(){
+    gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

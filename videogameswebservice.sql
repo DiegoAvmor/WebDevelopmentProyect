@@ -76,8 +76,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`username`, `email`, `passwd`) VALUES
 ('DiegoAvmor', 'correoChafa', '123123'),
 ('Johan', 'correoalgobonito@hotmail.com', '123456789'),
-('NewUser', 'user@gmail.com.mx', '123456789');
-
+('NewUser', 'user@gmail.com.mx', '123456789'),
+('Rodrigo', 'mail@gmail.com.mx', '11111');
 --
 -- Índices para tablas volcadas
 --

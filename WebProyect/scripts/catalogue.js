@@ -42,7 +42,7 @@ function fetchUserGames(){
 
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
-	fetch("https://rawg-video-games-database.p.rapidapi.com/games?dates=2019-10-01,2019-10-30", {
+	fetch("https://rawg-video-games-database.p.rapidapi.com/games?page=1", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
@@ -74,7 +74,7 @@ function fetchGameInfo(gameID){
 	.then((resp) => resp.json())
 	.then(function (response) {
 			var jsonGame = response;
-			generateGame(jsonGame.background_image,jsonGame.name,jsonGame.released,jsonGame.developers[0].name,jsonGame.genres[0].name,jsonGame.description);
+			generateGame(jsonGame.id,jsonGame.background_image,jsonGame.name,jsonGame.released,jsonGame.developers[0].name,jsonGame.genres[0].name,jsonGame.description);
 	})
 	.catch(function (err) {
 			console.log("No se puedo obtener el recurso", err);
@@ -82,7 +82,7 @@ function fetchGameInfo(gameID){
 }
 
 //Genera un contenedor con toda la información del juego
-function generateGame(image,name,date,developer,genre,description){
+function generateGame(id,image,name,date,developer,genre,description){
 	const gameInfo = document.createElement('div');
 	gameInfo.setAttribute('class','gameInfo');
 	const gameImage = document.createElement('div');
@@ -98,10 +98,10 @@ function generateGame(image,name,date,developer,genre,description){
 	gameData.setAttribute('class','gameData');
 	gameData.innerHTML = ("Released: " + date + "<br> Developer: " + developer
 	+ "<br> Genre: " + genre);
-	
+
 	const commBut= document.createElement('div');
 	commBut.setAttribute('class','commentButt');
-	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp()'>Comments(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
+	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp(" + id + ")'>Reviews(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
 
 	const gameDescription = document.createElement('div');
 	gameDescription.setAttribute('class','gameDescription');
@@ -150,7 +150,7 @@ window.onload= function(){
 //Lazy loading
 document.addEventListener("DOMContentLoaded", function() {
 	var games = [].slice.call(document.querySelectorAll(".gameInfo"));
-  
+
 	if ("IntersectionObserver" in window) {
 	  let lazygameObserver = new IntersectionObserver(function(entries, observer) {
 		entries.forEach(function(entry) {
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		  }
 		});
 	  });
-  
+
 	  games.forEach(function(game) {
 		lazygameObserver.observe(game);
 	  });
@@ -211,18 +211,53 @@ function userPaneSetup(){
 
 }
 	function reLoadGames(searchTerm){
-		//Recargar gameContainer con los juegos que encuentre
+		document.getElementById("gameContainer").innerHTML = "";
+		fetch(("https://rawg-video-games-database.p.rapidapi.com/games?search=" + searchTerm), {
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+			"x-rapidapi-key": "ba56e18dfbmsha0533de8919d27bp10d3dcjsn5229ce979bb3"
+		}
+		})
+		.then((resp) => resp.json())
+		.then(function (response) {
+				var jsonGameList = response;
+				//Envia el ID de cada uno de los juegos en la primera página
+				for(var i = 0; i < 19; i++){
+					fetchGameInfo(jsonGameList.results[i].id);
+				}
+		})
+		.catch(function (err) {
+				console.log("No se puedo obtener el recurso", err);
+		});
 	}
 
 
-function showCommentDisp(){
+function showCommentDisp(id){
 	document.getElementById("blackBG2").style.display="block";
 	document.getElementById("commentDisplay").style.display="block";
+	const revewbuttons = document.getElementById("reviewButLoc");
+	revewbuttons.innerHTML = ("<button id='reviewButton' onclick='writeReview(" + id + ")'>Write a Review</button>");
+	document.getElementById("id").value=id;
 }
+
 function exitCommentDisp(){
 		document.getElementById("blackBG2").style.display="none";
 	document.getElementById("commentDisplay").style.display="none";
 }
+
+function writeReview(id){
+	exitCommentDisp();
+	document.getElementById("blackBG2").style.display="block";
+	document.getElementById("reviewEditor").style.display="block";
+	document.getElementById('gamesid').value=id;
+}
+
+function exitReviewDisp(){
+	document.getElementById("blackBG2").style.display="none";
+	document.getElementById("reviewEditor").style.display="none";
+}
+
 function validateUser(){
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -239,7 +274,7 @@ function validateUser(){
 			} catch{
 				console.log(this.responseText);
 			}
-        }
+    }
 	}
 	let url = new URLSearchParams(window.location.search);
 	let urlValue = "../scripts/validateUser.php";
