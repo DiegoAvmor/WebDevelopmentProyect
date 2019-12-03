@@ -6,28 +6,33 @@ var titleInput = title.value;
 var reviewArea = review.value;
 
 reviewForm.agregar.onclick = function(){
+  event.preventDefault();
+  addReview();
+}
+
+function addReview(){
     gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=0";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             handleResponse(this.responseText);
-            answer.value = this.responseText;
         }
     }
     xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review&option=0", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(stringBuilder);
+    document.getElementById("blackBG2").style.display="none";
+  	document.getElementById("reviewEditor").style.display="none";
 }
 
-reviewForm.delete.onclick = function(){
+function deleteReview(){
     gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=1";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             handleResponse(this.responseText);
-            answer.value = this.responseText;
         }
     }
     xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review", true);
@@ -35,14 +40,13 @@ reviewForm.delete.onclick = function(){
     xmlhttp.send(stringBuilder);
 }
 
-reviewForm.update.onclick = function(){
+function updateReview(){
     gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid+"&"+title.name+"="+title.value +"&"+ review.name+"="+review.value+"&"+ rating.name+"="+rating.value+"&option=2";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             handleResponse(this.responseText);
-            answer.value = this.responseText;
         }
     }
     xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review", true);
@@ -50,13 +54,12 @@ reviewForm.update.onclick = function(){
     xmlhttp.send(stringBuilder);
 }
 
-reviewForm.obtener.onclick = function(){
+function fetchReview(){
     gameid = reviewForm.id.value;
     var stringBuilder = "gameid="+gameid;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            answer.value = this.responseText;
             handleResponse(this.responseText);
         }
     }

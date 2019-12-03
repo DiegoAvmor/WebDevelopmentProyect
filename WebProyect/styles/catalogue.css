@@ -72,7 +72,7 @@
 			overflow-y: auto;
 		}
 		#userName{
-			margin-top: 0px;
+			margin-top: 10px;
 			text-align: center;
 			font-size: 35px;
 			margin-left: 0px;
@@ -249,7 +249,11 @@
 
 		}
 		#reviewButton{
-
+			border-style: solid;
+			border-color: white;
+			border-radius: 15px;
+			background-color: white;
+			width: 120px;
 			position: absolute;
 			right: 3%;
 			bottom: 3%;
@@ -260,6 +264,8 @@
 			background-color:  #3c3c42;
 			border-style: none;
 			border-radius: 15px;
+			margin-left: 5px;
+			margin-right: 5px;
 		}
 
 		#commentDisplay{
@@ -270,7 +276,7 @@
 			left: 10%;
 			height: 92%;
 			width: 78%;
-			background-color: #bfcedf;
+			background-color: #61616b;
 			z-index: 4;
 		}
 		#gameInfoComm img{
@@ -392,6 +398,13 @@
 				height: 40%;
 				width: 70%;
 				resize: none;
+			}
+
+			.favGames{
+				font-weight: normal;
+				margin-top: 10px;
+				font-size: 18px;
+				margin-left: 0px;
 			}
 
 		  @keyframes spin {
