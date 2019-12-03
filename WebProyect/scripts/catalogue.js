@@ -245,12 +245,6 @@ document.getElementById("userImage").onclick= function(){
 		document.getElementById("blackBG").style.display = 'block';
 
 	}
-	// document.getElementById("editExitButt").onclick=function(){
-	//
-	// 	document.getElementById("userEdit").style.display="none";
-	// 	document.getElementById("blackBG").style.display = 'none';
-	// }
-
 	fetchUserGames();
 
 }
