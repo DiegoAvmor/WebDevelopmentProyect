@@ -1,8 +1,8 @@
 {
     "database" : {
-        "host" : "",
-        "user" : "",
-        "password": "",
+        "host" : "localhost",
+        "user" : "root",
+        "password": "root",
         "dbname":"videogameswebservice"
     }
 }

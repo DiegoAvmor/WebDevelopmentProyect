@@ -40,15 +40,6 @@ function fetchUserGames(){
     xmlhttp.send();
 }
 
-function updateInfo(){
-	document.getElementById("userName").innerHTML = document.getElementById("uname").innerHTML;
-	document.getElementById("name").innerHTML = document.getElementById("fname").innerHTML;
-	document.getElementById("emailAddress").innerHTML = document.getElementById("email").innerHTML;
-	document.getElementById("userCount").innerHTML = document.getElementById("country").innerHTML;
-	document.getElementById("userCity").innerHTML = document.getElementById("city").innerHTML;
-	document.getElementById("userBirthday").innerHTML = document.getElementById("bday").innerHTML;
-}
-
 //Recibe una lista de todos los juegos que salieron en Octubre
 function fetchGameList(){
 	fetch("https://rawg-video-games-database.p.rapidapi.com/games?page=1", {
@@ -83,7 +74,7 @@ function fetchGameInfo(gameID){
 	.then((resp) => resp.json())
 	.then(function (response) {
 			var jsonGame = response;
-			generateGame(jsonGame.background_image,jsonGame.name,jsonGame.released,jsonGame.developers[0].name,jsonGame.genres[0].name,jsonGame.description);
+			generateGame(jsonGame.id,jsonGame.background_image,jsonGame.name,jsonGame.released,jsonGame.developers[0].name,jsonGame.genres[0].name,jsonGame.description);
 	})
 	.catch(function (err) {
 			console.log("No se puedo obtener el recurso", err);
@@ -91,7 +82,7 @@ function fetchGameInfo(gameID){
 }
 
 //Genera un contenedor con toda la información del juego
-function generateGame(image,name,date,developer,genre,description){
+function generateGame(id,image,name,date,developer,genre,description){
 	const gameInfo = document.createElement('div');
 	gameInfo.setAttribute('class','gameInfo');
 	const gameImage = document.createElement('div');
@@ -110,7 +101,7 @@ function generateGame(image,name,date,developer,genre,description){
 
 	const commBut= document.createElement('div');
 	commBut.setAttribute('class','commentButt');
-	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp()'>Comments(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
+	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp(" + id + ")'>Reviews(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
 
 	const gameDescription = document.createElement('div');
 	gameDescription.setAttribute('class','gameDescription');
@@ -242,14 +233,31 @@ function userPaneSetup(){
 	}
 
 
-function showCommentDisp(){
+function showCommentDisp(id){
 	document.getElementById("blackBG2").style.display="block";
 	document.getElementById("commentDisplay").style.display="block";
+	const revewbuttons = document.getElementById("reviewButLoc");
+	revewbuttons.innerHTML = ("<button id='reviewButton' onclick='writeReview(" + id + ")'>Write a Review</button>");
+	document.getElementById("id").value=id;
 }
+
 function exitCommentDisp(){
 		document.getElementById("blackBG2").style.display="none";
 	document.getElementById("commentDisplay").style.display="none";
 }
+
+function writeReview(id){
+	exitCommentDisp();
+	document.getElementById("blackBG2").style.display="block";
+	document.getElementById("reviewEditor").style.display="block";
+	document.getElementById('gamesid').value=id;
+}
+
+function exitReviewDisp(){
+	document.getElementById("blackBG2").style.display="none";
+	document.getElementById("reviewEditor").style.display="none";
+}
+
 function validateUser(){
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

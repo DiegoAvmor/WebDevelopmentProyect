@@ -4,6 +4,7 @@
 	<title>Catalogue</title>
 	<link rel="stylesheet" type="text/css" href="../styles/catalogue.css">
 	<script type="text/javascript" src="../scripts/catalogue.js?id" defer></script>
+	<script type="text/javascript" src="../scripts/reviews.js?id" defer></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -69,7 +70,10 @@
 
 	<div id="commentDisplay">
 		<div id="commExitB">
-			<button id="commExitButt" onclick="exitCommentDisp()">X</button>
+			<button id='commExitButt' onclick='exitCommentDisp()'>X</button>
+		</div>
+		<div id="reviewButLoc">
+
 		</div>
 		<div id="gameInfoComm">
 			<div id="gameImgCOmm">
@@ -123,14 +127,42 @@
 			</div>
 			<div id="controlButts">
 
-				<button onclick="updateInfo()" id="editUpdateButt">Update</button>
+				<button id="editUpdateButt">Update</button>
 
 
 
 				<button id="editExitButt" type="button">Cancel</button>
 			</div>
+			</div>
 		</form>
 	</div>
+
+	<div id="reviewEditor">
+		<button id="reviewExitButt" onclick="exitReviewDisp()">X</button>
+		<br>
+		<div id="reviewHeader">
+			Write your review!
+		</div>
+		<form name="reviewForm">
+			<!-- Title -->
+				<input type="hidden" id="id" name="id">
+				<input type="hidden" name="title" id="title" value="placeholder"><br>
+				<textarea name="review" id="review" cols="30" rows="10"></textarea><br>
+				<select name="rating" id="rating" required>
+						<option value="">None</option>
+						<option value="1">Skip</option>
+						<option value="2">Bad</option>
+						<option value="3">Meh</option>
+						<option value="4">Recommended</option>
+						<option value="5">Exceptional</option5>
+				</select>
+				<!-- <input type="button" id="obtener" name="obtener" value="obtener"> -->
+				<input type="button" id="agregar" name="agregar" value="Publish">
+				<!-- <input type="button" id="update" name="update" value="actualizar">
+				<input type="button" id="delete" name="delete" value="eliminar"> -->
+		</form>
+	</div>
+
 	<div id="loadingIcon" hidden>(ㆆ _ ㆆ)</div>
 </body>
 </html>

@@ -248,6 +248,13 @@
 			background-color:
 
 		}
+		#reviewButton{
+
+			position: absolute;
+			right: 3%;
+			bottom: 3%;
+
+		}
 		.commentB{
 			color: var(--textColor);
 			background-color:  #3c3c42;
@@ -330,6 +337,62 @@
 		  	background-color: transparent;
 
 		  }
+
+			#reviewExitButt{
+		  	font-weight: bold;
+		  	color: #fd665e;
+		  	font-size: 150%;
+		  	border-style: none;
+		  	background-color: transparent;
+
+		  }
+
+			#reviewEditor{
+				display: none;
+				position: fixed;
+				top: 5%;
+				left: 10%;
+				height: 50%;
+				width: 60%;
+				background-color: #61616b;
+				z-index: 4;
+			}
+
+			#reviewHeader{
+				font-weight: bold;
+				font-family: 'Roboto', sans-serif;
+	    	color: whitesmoke;
+				font-size: large;
+				text-align: center
+			}
+
+			#rating{
+				display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+			}
+
+			#agregar{
+				display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+				border-style: solid;
+				border-color: white;
+				margin-top: 5px;
+				border-radius: 15px;
+				background-color: white;
+				width: 60px;
+			}
+
+			#review{
+				display: block;
+				overflow-y:auto;
+    		margin-left: auto;
+    		margin-right: auto;
+				height: 40%;
+				width: 70%;
+				resize: none;
+			}
 
 		  @keyframes spin {
 			from {
