@@ -2,7 +2,6 @@ const app = document.getElementById("gameContainer");
 const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
-fetchUserGames();
 
 //TODO: Create Objects "games"
 
@@ -13,7 +12,9 @@ function fetchUserData(){
 		   let json = JSON.parse(this.responseText);
 		   console.log(json);
 		   console.log(json.mensaje.username);
+			 document.getElementById("userName").innerHTML = json.mensaje.username;
 		   console.log(json.mensaje.email);
+			 document.getElementById("emailAddress").innerHTML = "<p>" + json.mensaje.email + "</p>";
 		   console.log(json.mensaje.passwd);
         }
     }
@@ -30,6 +31,7 @@ function fetchUserGames(){
 			if(json.ok){
 				json.mensaje.forEach(games => {
 					console.log(games.gameid);
+					fetchGameName(games.gameid);
 				});
 			}else{
 				console.log(json.mensaje);
@@ -38,6 +40,47 @@ function fetchUserGames(){
     }
     xmlhttp.open("GET", "../scripts/userInformation.php?action=user_fav", true);
     xmlhttp.send();
+}
+
+function addFavorite(id){
+	gameid = id;
+	var stringBuilder = "gameID="+gameid;
+	let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+					console.log(this.responseText);
+        }
+    }
+    xmlhttp.open("POST", "../scripts/userInformation.php?action=user_fav", true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(stringBuilder);
+}
+
+function generateFavGame(name){
+	const favGame = document.createElement('div');
+	favGame.setAttribute('class','favGames');
+	favGame.innerHTML = (name);
+
+	document.getElementById("favGameList").appendChild(favGame);
+}
+
+function fetchGameName(gameID){
+	fetch(("https://rawg-video-games-database.p.rapidapi.com/games/" + gameID), {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+		"x-rapidapi-key": "ba56e18dfbmsha0533de8919d27bp10d3dcjsn5229ce979bb3"
+	}
+	})
+	.then((resp) => resp.json())
+	.then(function (response) {
+			var jsonGame = response;
+			console.log(jsonGame.name);
+			generateFavGame(jsonGame.name);
+	})
+	.catch(function (err) {
+			console.log("No se puedo obtener el recurso", err);
+	});
 }
 
 //Recibe una lista de todos los juegos que salieron en Octubre
@@ -101,7 +144,7 @@ function generateGame(id,image,name,date,developer,genre,description){
 
 	const commBut= document.createElement('div');
 	commBut.setAttribute('class','commentButt');
-	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp(" + id + ")'>Reviews(0)</button>"); //Buscar como contar numero de comentarios y cambiar el 0 por eso.
+	commBut.innerHTML=("<button class='commentB' onClick='showCommentDisp(" + id + ")'>Reviews</button><button class='commentB' onClick='addFavorite(" + id + ")'>Favorite</button>");
 
 	const gameDescription = document.createElement('div');
 	gameDescription.setAttribute('class','gameDescription');
@@ -124,7 +167,6 @@ window.onload= function(){
 	loadIcon.removeAttribute('hidden');//Hacemos visible el icono de carga
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
-	userPaneSetup();
 
 	//inactivityTime();
 
@@ -167,11 +209,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
   });
 
-function userPaneSetup(){
-	document.getElementById("userImage").onclick= function(){
+document.getElementById("userImage").onclick= function(){
+		document.getElementById("favGameList").innerHTML = "";
+
 		document.getElementById("blackBG").style.display = 'block';
 		document.getElementById("userPanel").style.display = 'block';
-	}
+
 	document.getElementById("gameContainer").onclick= function(){
 		document.getElementById("blackBG").style.display = 'none';
 		document.getElementById("userPanel").style.display = 'none';
@@ -202,12 +245,13 @@ function userPaneSetup(){
 		document.getElementById("blackBG").style.display = 'block';
 
 	}
-	document.getElementById("editExitButt").onclick=function(){
+	// document.getElementById("editExitButt").onclick=function(){
+	//
+	// 	document.getElementById("userEdit").style.display="none";
+	// 	document.getElementById("blackBG").style.display = 'none';
+	// }
 
-		document.getElementById("userEdit").style.display="none";
-		document.getElementById("blackBG").style.display = 'none';
-		return getData();
-	}
+	fetchUserGames();
 
 }
 	function reLoadGames(searchTerm){
@@ -237,7 +281,7 @@ function showCommentDisp(id){
 	document.getElementById("blackBG2").style.display="block";
 	document.getElementById("commentDisplay").style.display="block";
 	const revewbuttons = document.getElementById("reviewButLoc");
-	revewbuttons.innerHTML = ("<button id='reviewButton' onclick='writeReview(" + id + ")'>Write a Review</button>");
+	revewbuttons.innerHTML = ("<button id='reviewButton' onclick='writeReview()'>Write a Review</button>");
 	document.getElementById("id").value=id;
 }
 
@@ -246,11 +290,10 @@ function exitCommentDisp(){
 	document.getElementById("commentDisplay").style.display="none";
 }
 
-function writeReview(id){
+function writeReview(){
 	exitCommentDisp();
 	document.getElementById("blackBG2").style.display="block";
 	document.getElementById("reviewEditor").style.display="block";
-	document.getElementById('gamesid').value=id;
 }
 
 function exitReviewDisp(){
