@@ -202,13 +202,6 @@ function userPaneSetup(){
 		document.getElementById("blackBG").style.display = 'block';
 
 	}
-	document.getElementById("editExitButt").onclick=function(){
-
-		document.getElementById("userEdit").style.display="none";
-		document.getElementById("blackBG").style.display = 'none';
-		return getData();
-	}
-
 }
 	function reLoadGames(searchTerm){
 		document.getElementById("gameContainer").innerHTML = "";

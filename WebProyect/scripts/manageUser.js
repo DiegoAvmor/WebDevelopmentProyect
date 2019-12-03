@@ -31,9 +31,9 @@ function deleteUser(){
     var xhr = new XMLHttpRequest();
     xhr.open('DELETE', '../scripts/userInformation.php?action=user_data');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
+    xhr.onreadystatechange = function() {
         if (xhr.status === 200) {
-            console.log(responseText);
+            console.log(this.responseText);
         }
     };
     xhr.send();
