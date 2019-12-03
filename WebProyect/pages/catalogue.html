@@ -3,6 +3,7 @@
 <head>
 	<title>Catalogue</title>
 	<link rel="stylesheet" type="text/css" href="../styles/catalogue.css">
+	<script src="../scripts/manageUser.js" defer></script>
 	<script type="text/javascript" src="../scripts/catalogue.js?id" defer></script>
 	<script type="text/javascript" src="../scripts/reviews.js?id" defer></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -84,7 +85,6 @@
 		&nbsp;
 	</div>
 	<div id="userEdit">
-		<form>
 			<div id="userInfoEd">
 			&nbsp;
 			<div id="userImagePaneEd">
@@ -92,29 +92,22 @@
 				<input type="file" name="fileUp" value="upload">
 			</div>
 			<form name="userForm">
-						<div id="userTextEd">
+				<div id="userTextEd">
 				<b>UserName:</b>
 				<div id="userNameEd">
 					<input type="text" name="userName" placeholder="Guest">
-								</div>
-
-				<b>Name:</b>
-				<div id="nameEd">
-					<input type="text" name="Name" placeholder= "Guest User">
 				</div>
-
 				<b>E-Mail Address:</b>
 				<div id="emailAddressEd">
 					<input type="text" name="mail" placeholder="dumbo@gmail.com">
-								</div>
+				</div>
 			</div>
 			<div id="controlButts">
 				<button id="editUpdateButt" name="updateBtn">Update</button>
 				<button id="editExitButt" name="deleteBtn">Delete</button>
 			</div>
-		</form>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 
 	<div id="reviewEditor">
