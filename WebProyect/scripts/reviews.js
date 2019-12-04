@@ -95,6 +95,8 @@ function addReview(){
     xmlhttp.open("POST", "../scripts/userInformation.php?action=game_review&option=0", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(stringBuilder);
+    document.getElementById("blackBG2").style.display="none";
+  	document.getElementById("reviewEditor").style.display="none";
 }
 
 function deleteReview(){

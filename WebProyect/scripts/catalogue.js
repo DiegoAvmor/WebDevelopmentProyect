@@ -3,6 +3,8 @@ const loadIcon = document.getElementById("loadingIcon");
 validateUser();//Validamos antes si es un usuario valido
 fetchUserData();
 
+//TODO: Create Objects "games"
+
 function fetchUserData(){
 	let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

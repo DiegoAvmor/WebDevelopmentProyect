@@ -56,7 +56,7 @@ function manageUser(){
         if(count($resultado) == 1){//Se encontro asi que le mandamos la informacion
             $jsonMessage = convertOneValueArray($resultado);
             $GLOBALS['mensaje'] = ($jsonMessage);
-        
+
         }else{//Esto no se debe de hacer porque ya tenemos una session con el usuario
             $GLOBALS['ok'] = false;
             $GLOBALS['mensaje'] = "No se encontro el usuario, decirle a los del back end que la cagaron";
@@ -96,7 +96,7 @@ function manageUser(){
 /*
 ?action = user_fav
 Metodo GET => Obtencion de los juegos que el usuario guardo como favorito
-Metodo POST => Elimina/Añade el juego a favoritos 
+Metodo POST => Elimina/Añade el juego a favoritos
 !!Es necesario que uno de los parametros de post sea gameID
 */
 function manageFavorites(){
@@ -112,7 +112,7 @@ function manageFavorites(){
             $date = date('Y-m-d');
             $sql = "INSERT INTO usergames ( username , gameid , fecha ) VALUES ('{$username}', '{$gameid}', '{$date}')";
         }else{//De otro modo lo eliminamos de favoritos
-            $sql = "DELETE FROM usergames WHERE username = '{$user}' AND gameid = '{$gameid}'";
+            $sql = "DELETE FROM usergames WHERE username = '{$username}' AND gameid = '{$gameid}'";
             $GLOBALS['mensaje'] = "Se elimino de tus favoritos";
         }
         EjecutarSQL($sql);
@@ -187,7 +187,7 @@ function POSTReviewMethods($username, $gameid){ //Se sobreentiende que se proces
 }
 
 function GETReviewMethods($username, $gameid){ //GET
-    $sql = "SELECT * FROM reviews WHERE username = '{$username}' ";
+    $sql = "SELECT * FROM reviews WHERE gameid = '{$gameid}' ";
     $result = ConsultaSQL($sql);
     if(count($result)>0){
         $GLOBALS['mensaje'] =  ($result);//Se pone la lista de favoritos como el mensaje
