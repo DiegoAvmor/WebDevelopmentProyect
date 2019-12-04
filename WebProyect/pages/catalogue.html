@@ -4,8 +4,8 @@
 	<title>Catalogue</title>
 	<link rel="stylesheet" type="text/css" href="../styles/catalogue.css">
 	<script src="../scripts/manageUser.js?id" defer></script>
-	<script type="text/javascript" src="../scripts/catalogue.js?id" defer></script>
-	<script type="text/javascript" src="../scripts/reviews.js?id" defer></script>
+	<script type="text/javascript" src="../scripts/catalogue.js?i" defer></script>
+	<script type="text/javascript" src="../scripts/reviews.js?i" defer></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -30,6 +30,9 @@
 
 	</div>
 	<div id="userPanel">
+		<div id="commExitB">
+			<button id='commExitButt' onclick='exitUserPane()'>X</button>
+		</div>
 		<div id="userStuff">
 			<div id="userText">
 				<div id="userName">
@@ -38,11 +41,7 @@
 				<b>E-Mail Address:</b>
 				<div id="emailAddress"></div>
 				<br/>
-				<b>Favorite Games:<b>
-				<div id="favGameList">
-				</div>
-				<br/>
-				<div id="customize"><button id="editButt">Edit</button><button id="exitButt">LogOut</button></div>
+				<div id="customize"><button id="editButt">Edit</button><button id="exitButt">Log Out</button></div>
 
 			</div>
 
@@ -58,29 +57,32 @@
 		<div id="commExitB">
 			<button id='commExitButt' onclick='exitCommentDisp()'>X</button>
 		</div>
+		<div id="reviewDisplay">
+
+		</div>
 		<div id="reviewButLoc">
 
 		</div>
-		<div id="gameInfoComm">
-			<div id="gameImgCOmm">
-				<img id="commentGameInfoImage" src="../images/test/splatTim1.jpg">
-				<button id="imageChangeButt" onclick="imageChange()">test</button>
-			</div>
-		</div>
 		&nbsp;
 	</div>
+
 	<div id="userEdit">
+			<button id='commExitButt' onclick='exitUserPane()'>X</button>
 			<div id="userInfoEd">
 			&nbsp;
 			<form name="userForm">
 				<div id="userTextEd">
-				<b>UserName:</b>
+				
 				<div id="userNameEd">
-					<input type="text" name="userName" placeholder="Guest">
+					<b>UserName:</b>
+					<br>
+					<input type="text" name="userName" placeholder="New Username">
 				</div>
-				<b>E-Mail Address:</b>
+				
 				<div id="emailAddressEd">
-					<input type="text" name="mail" placeholder="dumbo@gmail.com">
+					<b>E-Mail Address:</b>
+					<br>
+					<input type="text" name="mail" placeholder="New Email">
 				</div>
 			</div>
 			<div id="controlButts">
@@ -111,12 +113,26 @@
 						<option value="5">Exceptional</option5>
 				</select>
 				<!-- <input type="button" id="obtener" name="obtener" value="obtener"> -->
-				<input type="button" id="agregar" name="agregar" value="Publish">
+				<input type="button" id="agregar" name="agregar" value="Submit">
 				<!-- <input type="button" id="update" name="update" value="actualizar">
 				<input type="button" id="delete" name="delete" value="eliminar"> -->
 		</form>
+
 	</div>
 
+	<div id="alreadyReviewed">
+		<div id="alreadyMsg">
+		You have already reviewed this game. Do you wish to update or delete your review?
+		</div>
+		<br/>
+		<div id="alreadyButts">
+			<input type="button" id="update" name="update" value="Update">
+			<input type="button" id="delete" name="delete" value="Delete">
+			<input type="button" id="cancel" name="cancel" value="Cancel">
+		</div>
+	</div>
+	<iframe src="" allow="autoplay" id="audio" style="display:none"></iframe>
+	<audio id="audioplayer"  loop ></audio>
 	<div id="loadingIcon" hidden>(ㆆ _ ㆆ)</div>
 </body>
 </html>

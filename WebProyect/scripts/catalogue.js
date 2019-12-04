@@ -18,7 +18,7 @@ function fetchUserData(){
 		   console.log(json.mensaje.passwd);
         }
     }
-    xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
+	xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
     xmlhttp.send();
 }
 
@@ -31,7 +31,7 @@ function fetchUserGames(){
 			if(json.ok){
 				json.mensaje.forEach(games => {
 					console.log(games.gameid);
-					fetchGameName(games.gameid);
+					fetchFavGame(games.gameid);
 				});
 			}else{
 				console.log(json.mensaje);
@@ -56,15 +56,7 @@ function addFavorite(id){
     xmlhttp.send(stringBuilder);
 }
 
-function generateFavGame(name){
-	const favGame = document.createElement('div');
-	favGame.setAttribute('class','favGames');
-	favGame.innerHTML = (name);
-
-	document.getElementById("favGameList").appendChild(favGame);
-}
-
-function fetchGameName(gameID){
+function fetchFavGame(gameID){
 	fetch(("https://rawg-video-games-database.p.rapidapi.com/games/" + gameID), {
 	"method": "GET",
 	"headers": {
@@ -76,7 +68,7 @@ function fetchGameName(gameID){
 	.then(function (response) {
 			var jsonGame = response;
 			console.log(jsonGame.name);
-			generateFavGame(jsonGame.name);
+			displayFavGames(jsonGame.id, jsonGame.name, jsonGame.background_image);
 	})
 	.catch(function (err) {
 			console.log("No se puedo obtener el recurso", err);
@@ -124,6 +116,37 @@ function fetchGameInfo(gameID){
 	});
 }
 
+function displayFavGames(id,name,image){
+	const gameInfo = document.createElement('div');
+	gameInfo.setAttribute('class','gameInfo');
+	const gameImage = document.createElement('div');
+	gameImage.setAttribute('class','gameImage');
+	const cover = document.createElement('img');
+	cover.src = image;
+	const gameText = document.createElement('div');
+	gameText.setAttribute('class','gameText');
+	const gameTitle = document.createElement('div');
+	gameTitle.setAttribute('class','gameTitle');
+	gameTitle.textContent = name;
+	const gameData = document.createElement('div');
+	gameData.setAttribute('class','gameData');
+
+	const commBut= document.createElement('div');
+	commBut.setAttribute('class','commentButt');
+	commBut.innerHTML=("<button class='commentB' onClick='addFavorite(" + id + ")'>Favorite</button>");
+
+
+	//const gameFav
+	app.appendChild(gameInfo);
+	gameInfo.appendChild(gameImage);
+	gameImage.appendChild(gameTitle);
+	gameImage.appendChild(cover);
+	gameInfo.appendChild(gameText);
+	//gameText.appendChild(gameTitle);
+	gameText.appendChild(gameData);
+	gameText.appendChild(commBut);
+}
+
 //Genera un contenedor con toda la información del juego
 function generateGame(id,image,name,date,developer,genre,description){
 	const gameInfo = document.createElement('div');
@@ -167,27 +190,37 @@ window.onload= function(){
 	loadIcon.removeAttribute('hidden');//Hacemos visible el icono de carga
 	fetchGameList();
 	loadIcon.setAttribute("hidden","");//Lo volvemos invisible el icono de carga
-
+	document.getElementById("navTitle").onclick= musicPlay;
 	//inactivityTime();
 
 }
-	//test function
-	function imageChange(){
-		var newimg="";
-		var imgs = ["../images/test/splatTim1.jpg", "../images/test/splatTim2.jpg", "../images/test/splatTim3.jpg","../images/test/splatTim4.jpg"];
-		for (var i = 0; i < imgs.length; i++) {
-			console.log(document.getElementById("commentGameInfoImage").getAttribute('src'));
-			if((document.getElementById("commentGameInfoImage").getAttribute('src'))==imgs[i]){
-				if(i!=imgs.length-1){
-					newimg=imgs[i+1];
-				}else{
-					newimg=imgs[0];
-				}
-			}
-		}
+function musicPlay(){
+	 document.getElementById('audioplayer').muted = false;
+	var lastSong = null;
+    var selection = null;
+    var playlist = ["../music/Best Friend.mp3", "../music/City of Chances.mp3","../music/Emerald Dreams.mp3","../music/Feelings.mp3","../music/Home.mp3","../music/Loneliness.mp3","../music/Nostalgic Sunrise Beats.mp3","../music/Stunning Night.mp3","../music/Waiting You.mp3",]; // List of Songs
+    var player = document.getElementById("audioplayer");
 
-		document.getElementById("commentGameInfoImage").src=newimg;
-	}
+    player.autoplay=true;
+    player.addEventListener("ended", selectRandom); 
+
+    function selectRandom(){
+        while(selection == lastSong){ 
+            selection = Math.floor(Math.random() * playlist.length);
+        }
+        lastSong = selection;
+        player.src = playlist[selection]; 
+
+    }
+
+    selectRandom();
+    player.play();
+}
+
+
+
+
+
 
 //Lazy loading
 document.addEventListener("DOMContentLoaded", function() {
@@ -210,16 +243,13 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 document.getElementById("userImage").onclick= function(){
-		document.getElementById("favGameList").innerHTML = "";
-
-		document.getElementById("blackBG").style.display = 'block';
+		document.getElementById("gameContainer").innerHTML = "";
+		document.getElementById("gameContainer").style.gridTemplateColumns = "50%";
+		// document.getElementById("blackBG").style.display = 'block';
 		document.getElementById("userPanel").style.display = 'block';
 
-	document.getElementById("gameContainer").onclick= function(){
-		document.getElementById("blackBG").style.display = 'none';
-		document.getElementById("userPanel").style.display = 'none';
-		document.getElementById("userEdit").style.display = 'none';
-	}
+	// document.getElementById("gameContainer").onclick= function(){
+	// }
 	document.getElementById("searchBar").onclick= function(){
 		document.getElementById("userPanel").style.display = 'none';
 		document.getElementById("blackBG").style.display = 'none';
@@ -270,17 +300,9 @@ document.getElementById("userImage").onclick= function(){
 		});
 	}
 
-
-function showCommentDisp(id){
-	document.getElementById("blackBG2").style.display="block";
-	document.getElementById("commentDisplay").style.display="block";
-	const revewbuttons = document.getElementById("reviewButLoc");
-	revewbuttons.innerHTML = ("<button id='reviewButton' onclick='writeReview()'>Write a Review</button>");
-	document.getElementById("id").value=id;
-}
-
 function exitCommentDisp(){
 		document.getElementById("blackBG2").style.display="none";
+		document.getElementById("reviewDisplay").innerHTML="";
 	document.getElementById("commentDisplay").style.display="none";
 }
 
@@ -293,6 +315,15 @@ function writeReview(){
 function exitReviewDisp(){
 	document.getElementById("blackBG2").style.display="none";
 	document.getElementById("reviewEditor").style.display="none";
+	document.getElementById("reviewDisplay").innerHTML = "";
+}
+
+function exitUserPane(){
+	document.getElementById("gameContainer").style.gridTemplateColumns = "50% 50%";
+	reLoadGames("");
+	document.getElementById("blackBG").style.display = 'none';
+	document.getElementById("userPanel").style.display = 'none';
+	document.getElementById("userEdit").style.display = 'none';
 }
 
 function validateUser(){
