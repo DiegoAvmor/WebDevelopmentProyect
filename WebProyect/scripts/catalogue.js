@@ -10,12 +10,8 @@ function fetchUserData(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 		   let json = JSON.parse(this.responseText);
-		   console.log(json);
-		   console.log(json.mensaje.username);
-			 document.getElementById("userName").innerHTML = json.mensaje.username;
-		   console.log(json.mensaje.email);
-			 document.getElementById("emailAddress").innerHTML = "<p>" + json.mensaje.email + "</p>";
-		   console.log(json.mensaje.passwd);
+			document.getElementById("userName").innerHTML = json.mensaje.username;
+			document.getElementById("emailAddress").innerHTML = "<p>" + json.mensaje.email + "</p>";
         }
     }
 	xmlhttp.open("GET", "../scripts/userInformation.php?action=user_data", true);
@@ -27,14 +23,10 @@ function fetchUserGames(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 			let json = JSON.parse(this.responseText);
-			console.log(json);
 			if(json.ok){
 				json.mensaje.forEach(games => {
-					console.log(games.gameid);
 					fetchFavGame(games.gameid);
 				});
-			}else{
-				console.log(json.mensaje);
 			}
         }
     }
@@ -48,7 +40,7 @@ function addFavorite(id){
 	let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-					console.log(this.responseText);
+					
         }
     }
     xmlhttp.open("POST", "../scripts/userInformation.php?action=user_fav", true);
@@ -67,7 +59,6 @@ function fetchFavGame(gameID){
 	.then((resp) => resp.json())
 	.then(function (response) {
 			var jsonGame = response;
-			console.log(jsonGame.name);
 			displayFavGames(jsonGame.id, jsonGame.name, jsonGame.background_image);
 	})
 	.catch(function (err) {

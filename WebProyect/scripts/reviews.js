@@ -13,9 +13,9 @@ reviewForm.agregar.onclick = function(){
   var ratingin = document.getElementById("rating").value;
   if (reviewin == "" || reviewin.length == 0 || reviewin == null)
   {
-      alert("Please write a review before submitting.")
+      
   } else if (ratingin == "" || ratingin.length == 0 || ratingin == null){
-      alert("Please give a rating before submitting.")
+      
   } else{
     addReview();
     document.getElementById("blackBG2").style.display="none";
@@ -34,7 +34,6 @@ function showCommentDisp(id){
 
 function reviewCircle(list){
   for(var i = 0; Object.keys(list).length; i++){
-    console.log(list[i].username);
     generateReviewList(list[i].username,list[i].descripcion,list[i].calificacion,list[i].fecha);
   }
 }
@@ -146,7 +145,6 @@ function handleResponse(response,check){
     try{
         parsedResponse = JSON.parse(response);
         if(parsedResponse.ok){
-            console.log(parsedResponse.mensaje);
               if (parsedResponse.mensaje == "Already reviewed"){
                 document.getElementById("alreadyReviewed").style.display = "block";
             } else if(check == "1"){
@@ -155,8 +153,6 @@ function handleResponse(response,check){
               generatePopUpMessage(parsedResponse.mensaje);
             }
 
-        }else{
-            console.log(parsedResponse.mensaje);
         }
     } catch{
         console.log("No se pudo convertir a objeto");
