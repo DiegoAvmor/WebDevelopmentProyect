@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+#container{  
+    --font: 'Roboto', sans-serif;
+    --textColor: whitesmoke;  
+    background-color: #626267;
+}
+/*Aqui comienza la barra de arriba*/
+#navTitle{
+    font-family: var(--font);
+    color: var(--textColor);
+    font-size: 46px;
+    font-weight: bold;
+}
+#navBar{/*Estado default de la barra de navegacion*/
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto 15%;
+    background-color: transparent;
+    width: 100%;
+    transition: .8s;
+}
+
+#infoBox{
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-gap: 30px;
+}
+
+/*Aqui termina la barra de arriba*/
+
+#mainpage{
+    width: 100%;
+    top: 50px;
+    display: flexbox;
+}
+#optionBox{
+    padding: auto;
+    width: 100%;
+    background-color: #3c3c42;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+}
+#optionBox > a{
+    margin: auto;
+    text-decoration: none;
+}
+
+.box{
+    font-family: var(--font);
+    color: var(--textColor);
+}
+.box:hover{
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+.info{
+    text-align: center;
+}
+.text{    
+    font-family: var(--font);
+    color: var(--textColor);
+    padding-left: 50px;
+    padding-right: 50px;
+    letter-spacing: 4px;
+}
+#mainImg > div#textBox{
+    position: absolute;
+    width: 50%;
+    height: 130px;
+    top: 25%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    border-radius: 25px;
+    background-color: #3c3c42;
+    opacity: .8;
+    align-content: center;
+}
+h1{
+    font-family: var(--font);
+    color: var(--textColor);
+}

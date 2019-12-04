@@ -1,0 +1,565 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+		body{
+			--font: 'Roboto', sans-serif;
+    		--textColor: whitesmoke;
+			margin: 0%;
+			padding: 0%;
+			width :100%;
+			height: 100vh;
+			overflow: hidden;
+		}
+		/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #61616b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9e9d9d;
+}
+
+		#blackBG{
+			pointer-events: none;
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			background-color: black;
+			opacity: .5;
+			z-index: 2;
+			display: none;
+		}
+		#blackBG2{
+			pointer-events: none;
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			background-color: black;
+			opacity: .5;
+			z-index: 2;
+			display: none;
+		}
+
+		#navTitle{
+			font-family: var(--font);
+    		color: var(--textColor);
+    		font-size: 46px;
+    		font-weight: bold;
+			width: 25%;
+			float: left;
+		}
+		#userPanel{
+			display: none;
+			font-family: var(--font);
+    		color: var(--textColor);
+    		font-size: 20px;
+			position: fixed;
+			width: 25%;
+			margin-left: 75%;
+			height:100%;
+			background-color: #61616b;
+			z-index: 3;
+			overflow-y: auto;
+		}
+		#userName{
+			margin-top: 10px;
+			text-align: center;
+			font-size: 35px;
+			margin-left: 0px;
+		}
+		#userText p{
+			margin-top: 5px;
+		}
+		#userText{
+			margin-left: 20px;
+		}
+		#userImagePane img{
+			margin-top: 5%;
+			margin-left: 23%;
+			border-radius: 50%;
+			width: 230px;
+			background-color: white;
+		}
+		#userImagePane{
+			background-color: #61616b;
+		}
+		#customize button{
+			border-style: none;
+			color: var(--textColor);
+			font-weight: bold;
+			font-size: 15px;
+			background-color: #3c3c42;
+			border-radius: 15px;
+			width: 90px;
+			height:40px;
+			margin-left: 16%;
+			margin-top: 10px;
+
+		}
+
+		#searchBar{
+			margin: auto;
+			margin-top: 1.9%;
+		}
+
+
+		#searchBar > i{
+			position: absolute;
+		}
+		#searchB{
+			margin-left: 10px;
+			border-style: none;
+		}
+
+		#searchB:focus {outline:none;}
+
+		#searchBar > input:not(#searchButt) {
+			margin: auto;
+			border-radius: 15px;
+			width: 230px;
+			height: 20px;
+			background-color: white;
+			padding-left: 30px;
+		}
+		#searchButt{
+			border-style: solid;
+			border-color: white;
+			margin-top: 1px;
+			border-radius: 15px;
+			background-color: white;
+			width: 60px;
+		}
+		#searchButt:hover {
+			border-color: lightgray;
+			background-color: lightgray;
+		}
+		#userInfo{
+			float: right;
+			margin: auto;
+		}
+		#userInfo img{
+			margin: auto;
+			  	height: 43px;
+  				width: 43px;
+  			border-radius: 50%;
+		}
+		#navBar{
+			z-index: 1;
+			position: fixed;
+			width: 100%;
+			background-color: #3c3c42;
+			display: grid;
+			grid-template-columns: auto auto 5%;
+		}
+		#gameContainer{
+			background-image: url("../images/main/8bitBG.jpg");
+  			background-repeat: no-repeat;
+  			background-attachment: fixed;
+			margin-right: 0%;
+			margin-top: 26PX;
+			height: 94.5%;
+			display: grid;
+			grid-template-columns: 50% 50%;
+			overflow-y: auto;
+			background-color: #508AA8;
+		}
+		.gameInfo{
+			background-color: #61616b;
+			color: #3c3c42;
+			box-shadow:inset 0px 0px 0px 10px;
+			margin-top: 20px;
+			margin-left: 40px;
+			margin-right: 10px;
+			width: 375px;
+			height: 280px;
+			float: left;
+			-webkit-transition: width 2s;
+			transition: width 2s;
+
+		}
+		.gameInfo:hover {
+			width:90%;
+		}
+
+		#favInfo{
+			background-color: #61616b;
+			color: #3c3c42;
+			box-shadow:inset 0px 0px 0px 10px;
+			margin-top: 20px;
+			margin-left: 40px;
+			margin-right: 10px;
+			width: 440px;
+			height: 280px;
+			float: left;
+
+		}
+
+
+		.gameImage img{
+			height: 250px;
+			width: 350px;
+		}
+		.gameImage{
+			width: auto;
+			height: 250px;
+			float: left;
+			position: relative;
+  			left: 15px;
+			top: 15px;
+		}
+		.gameText{
+			opacity: 0;
+
+			position: relative;
+			top: 25px;
+			font-family: var(--font);
+    		color: var(--textColor);
+			left: 50px;
+			width: 90%;
+			height: 100%;
+
+
+		}
+		.gameText:hover {
+			transition: opacity 2s;
+			transition-delay: 2s;
+			opacity:1;
+
+		}
+		.gameText:not( :hover ){
+			opacity:0;
+		}
+
+		#favButton{
+			position: relative;
+			top: 25px;
+			font-family: var(--font);
+    		color: var(--textColor);
+			left: 50px;
+			width: 90%;
+			height: 100%;
+		}
+
+		.gameTitle{
+			font-family: var(--font);
+    		color: var(--textColor);
+			position: absolute;
+			width: 100%;
+			bottom: 0px;
+			font-size: 20px;
+			font-weight: bold;
+			background-color: 	rgb(0, 0, 0,.8);/*fondo con opacidad*/
+		}
+		.gameDescription{
+			overflow-y: auto;
+			position: relative;
+			height: 130px;
+			max-height: 130px;
+		}
+		.commentButt{
+			position: absolute;
+			right: 3%;
+			bottom: 14%;
+		}
+		#reviewButton{
+			border-style: solid;
+			border-color: white;
+			border-radius: 15px;
+			background-color: white;
+			width: 120px;
+			position: absolute;
+			right: 3%;
+			bottom: 3%;
+
+		}
+		.commentB{
+			color: var(--textColor);
+			background-color:  #3c3c42;
+			border-style: none;
+			border-radius: 15px;
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+
+		#commentDisplay{
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+			border-radius: 15px;
+			overflow-y:auto;
+			display: none;
+			position: fixed;
+			top: 5%;
+			left: 10%;
+			height: 92%;
+			width: 78%;
+			background-color: #61616b;
+			z-index: 4;
+		}
+		#gameInfoComm img{
+			width: 350px;
+			height: auto;
+		}
+
+		#userEdit{
+			border-radius: 15px;
+			background-image: url('../images/main/userEdit.gif');
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+			overflow-y:auto;
+			display: none;
+			position: fixed;
+			top: 5%;
+			left: 10%;
+			height: 92%;
+			width: 78%;
+			background-color: #61616b;
+			z-index: 4;
+		}
+		#userInfoEd{
+			margin:0;
+
+		}
+		#userTextEd{
+			margin-left: 20%;
+		}
+		#userImagePaneEd{
+			margin-left: 500px;
+		}
+		#userNameEd{
+			background-color: #3c3c42;
+			width: 200px;
+			padding: 2%;
+			border-radius: 15px;
+		}
+		#emailAddressEd{
+			margin-top: 5%;
+			background-color: #3c3c42;
+			width: 200px;
+			padding: 2%;
+			border-radius: 15px;
+		}
+		#userTextEd{
+			color: var(--textColor);
+			font-size: 150%;
+			font-weight: bold;
+			margin-top: 10px;
+			margin-left: 40%;
+		}
+		#userImagePaneEd img{
+			height: 220px;
+			width: auto;
+			border-radius: 50%;
+		}
+		#controlButts{
+			margin-top: 25%;
+			margin-left: 10%;
+		}
+		#controlButts button{
+			border-style: none;
+			color: var(--textColor);
+			font-weight: bold;
+			font-size: 15px;
+			background-color: #3c3c42;
+			border-radius: 15px;
+			width: 90px;
+			height:40px;
+			margin-top: 10px;
+			margin-left: 25%;
+		}
+
+		#loadingIcon:not([hidden]) {
+			font-size: 30px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			animation: spin 1s infinite linear
+		  }
+		  #commExitB{
+		  	background-color: transparent;
+		  }
+		  #commExitButt{
+		  	font-weight: bold;
+		  	color: #fd665e;
+		  	font-size: 150%;
+		  	border-style: none;
+		  	background-color: transparent;
+
+		  }
+
+			#reviewExitButt{
+		  	font-weight: bold;
+		  	color: #fd665e;
+		  	font-size: 150%;
+		  	border-style: none;
+		  	background-color: transparent;
+
+		  }
+		  #reviewDisplay{
+		  	overflow-y: auto;
+
+
+		  }
+		  .reviewBox{
+		  	width:40%;
+		  	background-color: #61616b;
+		  	margin-top: 2%;
+		  	margin-left: 3%;
+		  	border-style: solid;
+		  	border-radius: 15px;
+		  	border-color: black;
+		    color: var(--textColor);
+		  }
+
+		  .unameShow{
+		  	padding-top: 1%;
+		  	padding-left: 2%;
+		  	border-radius: 14px 14px 0px 0px;
+		  	background-clip: border-box;
+		  	background-color: #363838;
+		  	font: var(--font);
+		  	font-weight: bold;
+		  	font-size: 110%;
+		  }
+		  .reviewShow{
+		  	padding-top: 2%;
+		  	max-height:200px;
+		  	min-height: 25px;
+		  	padding-left: 4%;
+		  	overflow-y: scroll;
+		  }
+		  .reviewFoot{
+		  	background-color:#8a8f8f;
+		  	border-radius: 0px 0px 14px 14px;
+		  	display: grid;
+		  	grid-template-columns: 50% 50%;
+		  }
+		  .scoreShow{
+		  	padding:2%;
+		  }
+		  .dateShow{
+
+		  	padding:2%;
+		  }
+			#reviewEditor{
+				color:#252727;
+				border-radius: 15px;
+				background-size: 100% 100%;
+				display: none;
+				position: fixed;
+				top: 5%;
+				left: 10%;
+				height: 50%;
+				width: 60%;
+				background-color: #61616b;
+				z-index: 4;
+			}
+
+			#reviewHeader{
+				font-weight: bold;
+				font-family: 'Roboto', sans-serif;
+	    		font-size: 200%;
+
+				text-align: center
+			}
+
+			#rating{
+				border-radius: 15px;
+				box-shadow: 3px 5px #61616b;
+				display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+			}
+
+			#agregar{
+				display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+				border-style: solid;
+				border-color: white;
+				box-shadow: 3px 5px #61616b;
+				margin-top: 25px;
+				border-radius: 15px;
+				background-color: white;
+				width: 60px;
+			}
+
+			#review{
+				box-shadow: 3px 5px #61616b;
+				border-radius: 15px;
+				display: block;
+				overflow-y:auto;
+    		margin-left: auto;
+    		margin-right: auto;
+				height: 45%;
+				width: 70%;
+				resize: none;
+			}
+
+			.favGames{
+				font-weight: normal;
+				margin-top: 10px;
+				font-size: 18px;
+				margin-left: 0px;
+			}
+
+			#alreadyReviewed{
+				color:#191a1a;
+				border-radius: 15px;
+				background-size: 100% 100%;
+
+				display: none;
+				position: fixed;
+				top: 5%;
+				left: 10%;
+				height: 50%;
+				width: 60%;
+				background-color: #61616b;
+				z-index: 4;
+			}
+			#alreadyMsg{
+				margin-top: 2vh;
+				width: 100%;
+				font-weight: bold;
+				font-size: 150%;
+				text-align: center;
+
+			}
+			#alreadyButts{
+				margin-top: 30%;
+
+			}
+			#alreadyButts input{
+				box-shadow: 3px 5px #61616b;
+				width: 90px;
+				height: 40px;
+				font-weight: bold;
+				font-size: 120%;
+				border-radius: 15px;
+				border-style: none;
+				background-color: white;
+				margin-left: 19%;
+			}
+
+		  @keyframes spin {
+			from {
+			  transform: rotate(0deg);
+			}
+			to {
+			  transform: rotate(360deg);
+			}
+		  }

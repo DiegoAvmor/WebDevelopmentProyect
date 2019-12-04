@@ -21,6 +21,15 @@ body{
     padding-top: 20%;
 }
 
+/*messagePopUp*/
+#messagePopup{
+   
+    background-color: dodgerblue;
+    height: 20px;
+    width: 60%;
+    margin: auto;
+}
+
 .container > #left .logContainer{
     margin: auto;
     padding: 10px;
@@ -31,6 +40,11 @@ body{
 
 i{
     color: white;
+}
+
+div#remeberDiv{
+    font-family: 'Roboto', sans-serif;
+    color: aliceblue;
 }
 
 .container>#right{
@@ -101,7 +115,7 @@ left: 110px;
 input{
     border-radius: 25px;
     border: none;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 }
 
 .textContent > input{

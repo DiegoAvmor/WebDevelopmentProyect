@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../styles/signUp.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="../scripts/signUp.js?id=1" defer></script>
+</head>
+<body>
+    
+    <div class="container" id="root">
+
+        <div id="formContainer">
+            <form name="formulario" id="formulario" action="" autocomplete="off"> <!--Hay que añadir accion-->
+                <div class="signUpContainer">
+                    <div class="textContent">
+                        <input type="text" name="userName" id="userName" placeholder="Username" required>
+                    </div>
+                    <div class="textContent">
+                        <input type="text" name="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="textContent">
+                        <input type="password" name="pass" id="pass" placeholder="Password" required>
+                    </div>
+                    <div class="textContent">
+                        <input type="password" name="repeatPass" id="repeatPass" placeholder="Repeat Password" required>
+                    </div>
+                    <input type="submit" value="Sign Up">
+                </div>                            
+            </form> 
+            <div id="helpBox">
+                <a href="login.html">Already a member?</a>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
