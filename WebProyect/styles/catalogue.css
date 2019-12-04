@@ -190,6 +190,21 @@
 		.gameInfo:hover {
 			width:90%;
 		}
+
+		#favInfo{
+			background-color: #61616b;
+			color: #3c3c42;
+			box-shadow:inset 0px 0px 0px 10px;
+			margin-top: 20px;
+			margin-left: 40px;
+			margin-right: 10px;
+			width: 440px;
+			height: 280px;
+			float: left;
+
+		}
+
+
 		.gameImage img{
 			height: 250px;
 			width: 350px;
@@ -223,6 +238,16 @@
 		}
 		.gameText:not( :hover ){
 			opacity:0;
+		}
+
+		#favButton{
+			position: relative;
+			top: 25px;
+			font-family: var(--font);
+    		color: var(--textColor);
+			left: 50px;
+			width: 90%;
+			height: 100%;
 		}
 
 		.gameTitle{
@@ -302,7 +327,7 @@
 		}
 		#userInfoEd{
 			margin:0;
-			
+
 		}
 		#userTextEd{
 			margin-left: 20%;
@@ -448,7 +473,7 @@
 				font-weight: bold;
 				font-family: 'Roboto', sans-serif;
 	    		font-size: 200%;
-				
+
 				text-align: center
 			}
 
@@ -496,7 +521,7 @@
 				color:#191a1a;
 				border-radius: 15px;
 				background-size: 100% 100%;
-				
+
 				display: none;
 				position: fixed;
 				top: 5%;

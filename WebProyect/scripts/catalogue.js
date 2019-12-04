@@ -118,13 +118,13 @@ function fetchGameInfo(gameID){
 
 function displayFavGames(id,name,image){
 	const gameInfo = document.createElement('div');
-	gameInfo.setAttribute('class','gameInfo');
+	gameInfo.setAttribute('id','favInfo');
 	const gameImage = document.createElement('div');
 	gameImage.setAttribute('class','gameImage');
 	const cover = document.createElement('img');
 	cover.src = image;
 	const gameText = document.createElement('div');
-	gameText.setAttribute('class','gameText');
+	gameText.setAttribute('id','favButton');
 	const gameTitle = document.createElement('div');
 	gameTitle.setAttribute('class','gameTitle');
 	gameTitle.textContent = name;
@@ -142,7 +142,6 @@ function displayFavGames(id,name,image){
 	gameImage.appendChild(gameTitle);
 	gameImage.appendChild(cover);
 	gameInfo.appendChild(gameText);
-	//gameText.appendChild(gameTitle);
 	gameText.appendChild(gameData);
 	gameText.appendChild(commBut);
 }
@@ -202,14 +201,14 @@ function musicPlay(){
     var player = document.getElementById("audioplayer");
 
     player.autoplay=true;
-    player.addEventListener("ended", selectRandom); 
+    player.addEventListener("ended", selectRandom);
 
     function selectRandom(){
-        while(selection == lastSong){ 
+        while(selection == lastSong){
             selection = Math.floor(Math.random() * playlist.length);
         }
         lastSong = selection;
-        player.src = playlist[selection]; 
+        player.src = playlist[selection];
 
     }
 
@@ -243,13 +242,11 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 document.getElementById("userImage").onclick= function(){
+		window.stop();
 		document.getElementById("gameContainer").innerHTML = "";
 		document.getElementById("gameContainer").style.gridTemplateColumns = "50%";
-		// document.getElementById("blackBG").style.display = 'block';
 		document.getElementById("userPanel").style.display = 'block';
 
-	// document.getElementById("gameContainer").onclick= function(){
-	// }
 	document.getElementById("searchBar").onclick= function(){
 		document.getElementById("userPanel").style.display = 'none';
 		document.getElementById("blackBG").style.display = 'none';
@@ -263,8 +260,7 @@ document.getElementById("userImage").onclick= function(){
 		document.getElementById("userInfo").style.backgroundColor= '#3c3c42';
 	}
 	document.getElementById("exitButt").onclick= function(){
-		//----------------Poner termino de sesión aquí-------------------!
-		document.location.href = "login.html";
+		logout();
 	}
 	document.getElementById("searchButt").onclick= function(){
 		reLoadGames(document.getElementById("searchB").value);
@@ -355,8 +351,7 @@ function validateUser(){
 
 
 function logout() {
-	document.location = '../pages/login.html';
-	//Hacer la parte de cierre de session
+	window.location.href = '../scripts/logout.php';
 }
 
 //Inactividad del usuario
