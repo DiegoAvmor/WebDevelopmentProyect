@@ -23,8 +23,9 @@ function updateUserInfo(){
         }
     };
     let stringBuilder = "username="+userForm.userName.value +"&mail="+userForm.mail.value;
-    console.log(stringBuilder);
     xhr.send(stringBuilder);
+    document.getElementById("userEdit").style.display="none";
+  	document.getElementById("blackBG").style.display = 'none';
 }
 
 function deleteUser(){
@@ -37,4 +38,5 @@ function deleteUser(){
         }
     };
     xhr.send();
+    document.location.href = "login.html";
 }
